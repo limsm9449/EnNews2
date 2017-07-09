@@ -12,7 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/my_ll_b"
+        android:layout_above="@+id/adView"
         android:layout_alignParentTop="true">
 
         <RelativeLayout
@@ -60,61 +60,6 @@
             android:layout_below="@+id/my_lv" />
 
     </RelativeLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/adView"
-        android:layout_marginBottom="5dp"
-        android:id="@+id/my_ll_b"
-        android:layout_marginTop="5dp">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp">
-
-            <Button
-                android:text="클릭 단어"
-                android:layout_width="match_parent"
-                android:id="@+id/my_b_news_word"
-                android:background="@drawable/my_button"
-                android:layout_weight="1"
-                android:layout_marginLeft="5dp"
-                android:textSize="16sp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="2dp" />
-
-            <Button
-                android:text="단어장"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/my_b_voc"
-                android:background="@drawable/my_button"
-                android:layout_marginRight="2dp"
-                android:textSize="16sp"
-                android:layout_weight="1"
-                android:layout_marginLeft="3dp" />
-
-            <Button
-                android:text="단어 학습"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/my_b_voc_study"
-                android:background="@drawable/my_button"
-                android:layout_weight="1"
-                android:layout_marginLeft="3dp"
-                android:textSize="16sp"
-                android:layout_marginRight="10dp" />
-        </LinearLayout>
-
-    </LinearLayout>
 
     <com.google.android.gms.ads.AdView
         xmlns:ads="http://schemas.android.com/apk/res-auto"

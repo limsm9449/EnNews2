@@ -57,8 +57,8 @@ public class NewsClickWordActivity extends AppCompatActivity implements View.OnC
         fab.setVisibility(View.GONE);
 
         ActionBar ab = (ActionBar) getSupportActionBar();
-        ab.setHomeButtonEnabled(true);
-        ab.setDisplayHomeAsUpEnabled(true);
+        //ab.setHomeButtonEnabled(true);
+        //ab.setDisplayHomeAsUpEnabled(true);
 
         dbHelper = new DbHelper(this);
         db = dbHelper.getWritableDatabase();

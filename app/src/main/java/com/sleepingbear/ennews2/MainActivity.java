@@ -17,11 +17,15 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.CursorAdapter;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -42,7 +46,7 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DbHelper dbHelper;
     private SQLiteDatabase db;
     private MainCursorAdapter adapter;
@@ -93,6 +97,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         System.out.println("=============================================== App Start ======================================================================");
         dbHelper = new DbHelper(this);
         db = dbHelper.getWritableDatabase();
@@ -110,10 +123,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         checkPermission();
-
-        findViewById(R.id.my_b_news_word).setOnClickListener(this);
-        findViewById(R.id.my_b_voc).setOnClickListener(this);
-        findViewById(R.id.my_b_voc_study).setOnClickListener(this);
 
         AdView av = (AdView)findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -222,61 +231,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_share) {
-            Intent msg = new Intent(Intent.ACTION_SEND);
-            msg.addCategory(Intent.CATEGORY_DEFAULT);
-            msg.putExtra(Intent.EXTRA_SUBJECT, "최고의 영어신문2 어플");
-            msg.putExtra(Intent.EXTRA_TEXT, "영어.. 참 어렵죠? '최고의 영어신문2' 어플을 사용해 보세요. https://play.google.com/store/apps/details?id=com.sleepingbear.ennews2 ");
-            msg.setType("text/plain");
-            startActivity(Intent.createChooser(msg, "어플 공유"));
-
-            return true;
-        } else if (id == R.id.action_patch) {
-            startActivity(new Intent(getApplication(), PatchActivity.class));
-
-            return true;
-        } else if (id == R.id.action_help) {
-            Bundle bundle = new Bundle();
-            Intent helpIntent = new Intent(getApplication(), HelpActivity.class);
-            helpIntent.putExtras(bundle);
-            startActivity(helpIntent);
-
-            return true;
-        } else if (id == R.id.action_settings) {
-            startActivity(new Intent(getApplication(), SettingsActivity.class));
-
-            return true;
-        } else if (id == R.id.action_no_ad) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.sleepingbear.ennews2")));
-        } else if (id == R.id.action_refresh) {
+        if (id == R.id.action_refresh) {
             taskKind = "NEWS_LIST";
             task = new NewsTask();
             task.execute();
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onClick(View v) {
-        DicUtils.dicLog("onClick");
-        Bundle bundle = new Bundle();
-        switch (v.getId()) {
-            case R.id.my_b_news_word:
-                Intent newClickWordIntent = new Intent(getApplication(), NewsClickWordActivity.class);
-                newClickWordIntent.putExtras(bundle);
-                startActivity(newClickWordIntent);
-
-                break;
-
-            case R.id.my_b_voc:
-                startActivity(new Intent(getApplication(), VocabularyNoteActivity.class));
-                break;
-            case R.id.my_b_voc_study:
-                startActivity(new Intent(getApplication(), StudyActivity.class));
-
-                break;
-        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -327,6 +288,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private long backKeyPressedTime = 0;
     @Override
     public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        //} else {
+        //    super.onBackPressed();
+        }
+
         //종료 시점에 변경 사항을 기록한다.
         if ( "Y".equals(DicUtils.getDbChange(getApplicationContext())) ) {
             DicUtils.writeInfoToFile(this, db, "");
@@ -416,6 +384,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             super.onPostExecute(result);
         }
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_click_word) {
+            startActivity(new Intent(getApplication(), NewsClickWordActivity.class));
+        } else if (id == R.id.nav_voc) {
+            startActivity(new Intent(getApplication(), VocabularyNoteActivity.class));
+        } else if (id == R.id.nav_study) {
+            startActivity(new Intent(getApplication(), StudyActivity.class));
+        } else if (id == R.id.nav_patch) {
+            startActivity(new Intent(getApplication(), PatchActivity.class));
+        } else if (id == R.id.nav_help) {
+            Bundle bundle = new Bundle();
+            Intent helpIntent = new Intent(getApplication(), HelpActivity.class);
+            helpIntent.putExtras(bundle);
+            startActivity(helpIntent);
+        } else if (id == R.id.nav_setting) {
+            startActivity(new Intent(getApplication(), SettingsActivity.class));
+        } else if (id == R.id.nav_share) {
+            Intent msg = new Intent(Intent.ACTION_SEND);
+            msg.addCategory(Intent.CATEGORY_DEFAULT);
+            msg.putExtra(Intent.EXTRA_SUBJECT, "최고의 영어신문2 어플");
+            msg.putExtra(Intent.EXTRA_TEXT, "영어.. 참 어렵죠? '최고의 영어신문2' 어플을 사용해 보세요. https://play.google.com/store/apps/details?id=com.sleepingbear.ennews2 ");
+            msg.setType("text/plain");
+            startActivity(Intent.createChooser(msg, "어플 공유"));
+        } else if (id == R.id.nav_review) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getPackageName())));
+        } else if (id == R.id.nav_other_app) {
+            String url ="http://blog.naver.com/limsm9449/221031416154";
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(intent);
+        } else if (id == R.id.nav_no_ad) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.sleepingbear.ennews2")));
+        } else if (id == R.id.nav_mail) {
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
+            intent.putExtra(Intent.EXTRA_TEXT, "어플관련 문제점을 적어 주세요.\n빠른 시간 안에 수정을 하겠습니다.\n감사합니다.");
+            intent.setData(Uri.parse("mailto:limsm9449@gmail.com"));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
 

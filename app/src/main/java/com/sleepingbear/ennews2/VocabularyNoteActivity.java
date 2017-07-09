@@ -96,8 +96,8 @@ public class VocabularyNoteActivity extends AppCompatActivity implements View.On
         });
 
         ActionBar ab = (ActionBar) getSupportActionBar();
-        ab.setHomeButtonEnabled(true);
-        ab.setDisplayHomeAsUpEnabled(true);
+        //ab.setHomeButtonEnabled(true);
+        //ab.setDisplayHomeAsUpEnabled(true);
 
         dbHelper = new DbHelper(this);
         db = dbHelper.getWritableDatabase();

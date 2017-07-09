@@ -23,8 +23,8 @@ public class HelpActivity extends AppCompatActivity {
         fab.setVisibility(View.GONE);
 
         ActionBar ab = getSupportActionBar();
-        ab.setHomeButtonEnabled(true);
-        ab.setDisplayHomeAsUpEnabled(true);
+        //ab.setHomeButtonEnabled(true);
+        //ab.setDisplayHomeAsUpEnabled(true);
 
         Bundle b = getIntent().getExtras();
         StringBuffer allSb = new StringBuffer();
@@ -38,6 +38,20 @@ public class HelpActivity extends AppCompatActivity {
         String kind = b.getString("KIND");
         if ( kind == null ) {
             kind = "";
+        }
+
+        tempSb.delete(0, tempSb.length());
+        tempSb.append("* 뉴스" + CommConstants.sqlCR);
+        tempSb.append(" .오른쪽 하단의 리스트 버튼을 클릭해서 뉴스를 선택하세요. " + CommConstants.sqlCR);
+        tempSb.append(" .뉴스를 선택하면 뉴스별 카테고리가 변경됩니다. " + CommConstants.sqlCR);
+        tempSb.append(" .카테고리를 선택하면 관련 뉴스를 조회합니다." + CommConstants.sqlCR);
+        tempSb.append(" .뉴스를 클릭하시면 뉴스 상세를 보실 수 있습니다." + CommConstants.sqlCR);
+        tempSb.append(" .뉴스를 길게 클릭하시면 사이트 기사를 보실 수 있습니다." + CommConstants.sqlCR);
+        tempSb.append("" + CommConstants.sqlCR);
+        if ( screen.equals(CommConstants.screen_novelView) ) {
+            CurrentSb.append(tempSb.toString());
+        } else {
+            allSb.append(tempSb.toString());
         }
 
         tempSb.delete(0, tempSb.length());
@@ -57,19 +71,8 @@ public class HelpActivity extends AppCompatActivity {
         }
 
         tempSb.delete(0, tempSb.length());
-        tempSb.append("* 영어 소설 사이트" + CommConstants.sqlCR);
-        tempSb.append("- 고전 영문 소설을 무료로 제공하고 있는 사이트 입니다." + CommConstants.sqlCR);
-        tempSb.append(" .해당 사이트에서 txt로 영문 소설을 받고, 어플에 등록해서 소설을 읽을 수 있습니다." + CommConstants.sqlCR);
-        tempSb.append("" + CommConstants.sqlCR);
-        if ( screen.equals(CommConstants.screen_novelSite) ) {
-            CurrentSb.append(tempSb.toString());
-        } else {
-            allSb.append(tempSb.toString());
-        }
-
-        tempSb.delete(0, tempSb.length());
-        tempSb.append("* 영문 소설 클릭 단어" + CommConstants.sqlCR);
-        tempSb.append("- 영어 소설을 보면서 클릭한 단어들에 대하여 관리하는 화면입니다." + CommConstants.sqlCR);
+        tempSb.append("* 뉴스 클릭 단어" + CommConstants.sqlCR);
+        tempSb.append("- 뉴스를 보면서 클릭한 단어들에 대하여 관리하는 화면입니다." + CommConstants.sqlCR);
         tempSb.append(" .상단 수정 버튼(연필모양)를 클릭하시면 단어를 선택, 삭제, 단어장에 저장, 신규 단어장에 저장할 수 있습니다." + CommConstants.sqlCR);
         tempSb.append(" .단어를 클릭하시면 단어상세를 보실 수 있습니다." + CommConstants.sqlCR);
         tempSb.append("" + CommConstants.sqlCR);

@@ -56,8 +56,8 @@ public class WordViewActivity extends AppCompatActivity implements View.OnClickL
         fab.setVisibility(View.GONE);
 
         ActionBar ab = getSupportActionBar();
-        ab.setHomeButtonEnabled(true);
-        ab.setDisplayHomeAsUpEnabled(true);
+        //ab.setHomeButtonEnabled(true);
+        //ab.setDisplayHomeAsUpEnabled(true);
 
         dbHelper = new DbHelper(this);
         db = dbHelper.getWritableDatabase();

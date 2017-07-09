@@ -44,9 +44,8 @@ public class CommConstants {
 
         public static String tag = "ennews2";
 
-        public static String infoFileName = "ennovel.txt";
-        public static String folderName = "/ennovel";
-        public static String novelFolderName = "/novel";
+        public static String infoFileName = "ennews2.txt";
+        public static String folderName = "/ennews2";
 
         //코드 등록
         public static String tag_code_ins = "C_CODE_INS" ;
@@ -56,13 +55,6 @@ public class CommConstants {
         public static String tag_click_word_ins = "C_CW_INS" ;
         //History 등록
         public static String tag_novel_ins = "C_NOVEL_INS" ;
-
-
-        public static String novel_fullbooks = "www.fullbooks.com" ;
-        public static String novel_classicreader = "www.classicreader.com" ;
-        public static String novel_loyalbooks = "www.loyalbooks.com" ;
-        public static String novel_local = "로컬 영문파일" ;
-
 
         public final static int a_news = 1;
 
