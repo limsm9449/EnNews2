@@ -146,7 +146,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 sCategory = position;
-                changeListView();
+
+                taskKind = "NEWS_LIST";
+                task = new NewsTask();
+                task.execute();
             }
 
             @Override
@@ -161,28 +164,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String newsCode = DicUtils.getNews("C")[sNews];
         String categoryCode = DicUtils.getNewsCategory(newsCode, "C")[sCategory];
 
-        String insDate = DicUtils.getDelimiterDate(DicUtils.getCurrentDate(), ".");
         Cursor cursor = db.rawQuery(DicQuery.getNewsList(newsCode, categoryCode), null);
-        if ( cursor.getCount() == 0 ) {
-            taskKind = "NEWS_LIST";
-            task = new NewsTask();
-            task.execute();
-        } else {
-            cursor.moveToNext();
-            if ( !insDate.equals(cursor.getString(cursor.getColumnIndexOrThrow("INS_DATE"))) ) {
-                taskKind = "NEWS_LIST";
-                task = new NewsTask();
-                task.execute();
-            } else {
-                ListView listView = (ListView) findViewById(R.id.my_lv);
-                adapter = new MainCursorAdapter(this, cursor, db, 0);
-                listView.setAdapter(adapter);
-                listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-                listView.setOnItemClickListener(itemClickListener);
-                listView.setOnItemLongClickListener(itemLongClickListener);
-                listView.setSelection(0);
-            }
-        }
+        ListView listView = (ListView) findViewById(R.id.my_lv);
+        adapter = new MainCursorAdapter(this, cursor, db, 0);
+        listView.setAdapter(adapter);
+        listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        listView.setOnItemClickListener(itemClickListener);
+        listView.setOnItemLongClickListener(itemLongClickListener);
+        listView.setSelection(0);
     }
 
     AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {

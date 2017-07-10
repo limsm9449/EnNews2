@@ -761,6 +761,7 @@ public class DicQuery {
         sql.append("FROM    DIC_NEWS" + CommConstants.sqlCR);
         sql.append("WHERE   NEWS = '" + newsCode +"'" + CommConstants.sqlCR);
         sql.append("AND     CATEGORY = '" + categoryCode +"'" + CommConstants.sqlCR);
+        sql.append("ORDER   BY INS_DATE DESC, SEQ" + CommConstants.sqlCR);
 
         DicUtils.dicSqlLog(sql.toString());
 
