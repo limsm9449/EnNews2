@@ -21,8 +21,8 @@ public class PatchActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ActionBar ab = getSupportActionBar();
-        //ab.setHomeButtonEnabled(true);
-        //ab.setDisplayHomeAsUpEnabled(true);
+        ab.setHomeButtonEnabled(true);
+        ab.setDisplayHomeAsUpEnabled(true);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.GONE);

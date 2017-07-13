@@ -145,6 +145,9 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             DicDb.initNews(db);
+
+                            DicUtils.initNewsPreferences(getApplicationContext());
+
                             Toast.makeText(getApplicationContext(), "뉴스 데이타가 초기화 되었습니다.", Toast.LENGTH_LONG).show();
                         }
                     })

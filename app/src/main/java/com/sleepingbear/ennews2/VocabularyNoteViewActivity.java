@@ -62,8 +62,8 @@ public class VocabularyNoteViewActivity extends AppCompatActivity implements Vie
 
         ActionBar ab = (ActionBar) getSupportActionBar();
         ab.setTitle(b.getString("kindName"));
-        //ab.setHomeButtonEnabled(true);
-        //ab.setDisplayHomeAsUpEnabled(true);
+        ab.setHomeButtonEnabled(true);
+        ab.setDisplayHomeAsUpEnabled(true);
 
         dbHelper = new DbHelper(this);
         db = dbHelper.getWritableDatabase();

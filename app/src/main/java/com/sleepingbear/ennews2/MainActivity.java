@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
                         sNews = arg1;
+
+                        DicUtils.setPreferences(getApplicationContext(), "sNews", Integer.toString(sNews));
                     }
                 });
                 dlg.setNegativeButton("취소", null);
@@ -90,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         ActionBar ab = getSupportActionBar();
                         ab.setTitle(newNames[sNews]);
 
-                        changeSpinner(newCodes[sNews]);
+                        changeSpinner(newCodes[sNews], 0);
                     }
                 });
                 dlg.show();
@@ -124,6 +126,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         checkPermission();
 
+        //5일 이전 데이타 삭제
+        String delDate = DicUtils.getDelimiterDate(DicUtils.getAddDay(DicUtils.getCurrentDate(), -5), ".");
+        DicDb.delOldNews(db, delDate);
+
+        //이전 기록
+        sNews = Integer.parseInt(DicUtils.getPreferences(getApplicationContext(), "sNews", "0"));
+        sCategory = Integer.parseInt(DicUtils.getPreferences(getApplicationContext(), "sCategory", "0"));
+
         AdView av = (AdView)findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         av.loadAd(adRequest);
@@ -133,10 +143,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ab.setTitle(newNames[sNews]);
 
         String[] newCodes = DicUtils.getNews("C");
-        changeSpinner(newCodes[sNews]);
+        changeSpinner(newCodes[sNews], sCategory);
     }
 
-    public void changeSpinner(String newsCode) {
+    public void changeSpinner(String newsCode, int pos) {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, DicUtils.getNewsCategory(newsCode, "N"));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinner = (Spinner) findViewById(R.id.my_s_category);
@@ -147,9 +157,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                        int position, long id) {
                 sCategory = position;
 
-                taskKind = "NEWS_LIST";
-                task = new NewsTask();
-                task.execute();
+                DicUtils.setPreferences(getApplicationContext(), "sCategory", Integer.toString(sCategory));
+
+                String newCode = DicUtils.getNews("C")[sNews];
+                if ( DicUtils.equalPreferencesDate(getApplicationContext(), newCode + "_" + DicUtils.getNewsCategory(newCode, "C")[sCategory]) ) {
+                    changeListView();
+                } else {
+                    taskKind = "NEWS_LIST";
+                    task = new NewsTask();
+                    task.execute();
+                }
             }
 
             @Override
@@ -157,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        spinner.setSelection(0);
+        spinner.setSelection(pos);
     }
 
     public void changeListView() {
@@ -233,10 +250,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DicUtils.dicLog("onActivityResult : " + requestCode + " : " + resultCode);
 
         switch ( requestCode ) {
-            case CommConstants.a_news :
-                if ( resultCode == RESULT_OK && "Y".equals(data.getStringExtra("isChange")) ) {
-                    changeListView();
-                }
+            case CommConstants.a_setting :
+                changeListView();
 
                 break;
         }
@@ -395,7 +410,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             helpIntent.putExtras(bundle);
             startActivity(helpIntent);
         } else if (id == R.id.nav_setting) {
-            startActivity(new Intent(getApplication(), SettingsActivity.class));
+            startActivityForResult(new Intent(getApplication(), SettingsActivity.class), CommConstants.a_setting);
         } else if (id == R.id.nav_share) {
             Intent msg = new Intent(Intent.ACTION_SEND);
             msg.addCategory(Intent.CATEGORY_DEFAULT);

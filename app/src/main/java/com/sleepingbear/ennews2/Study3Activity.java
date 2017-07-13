@@ -65,8 +65,8 @@ public class Study3Activity extends AppCompatActivity implements View.OnClickLis
 
         ActionBar ab = getSupportActionBar();
         ab.setTitle(b.getString("studyKindName"));
-        //ab.setHomeButtonEnabled(true);
-        //ab.setDisplayHomeAsUpEnabled(true);
+        ab.setHomeButtonEnabled(true);
+        ab.setDisplayHomeAsUpEnabled(true);
 
         findViewById(R.id.my_a_study3_rb_all).setOnClickListener(this);
         findViewById(R.id.my_a_study3_rb_m).setOnClickListener(this);

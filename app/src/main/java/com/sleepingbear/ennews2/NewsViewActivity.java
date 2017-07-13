@@ -85,8 +85,8 @@ public class NewsViewActivity extends AppCompatActivity implements View.OnClickL
 
         ActionBar ab = getSupportActionBar();
         ab.setTitle(b.getString("CATEGORY"));
-        //ab.setHomeButtonEnabled(true);
-        //ab.setDisplayHomeAsUpEnabled(true);
+        ab.setHomeButtonEnabled(true);
+        ab.setDisplayHomeAsUpEnabled(true);
 
         myTTS = new TextToSpeech(this, this);
 

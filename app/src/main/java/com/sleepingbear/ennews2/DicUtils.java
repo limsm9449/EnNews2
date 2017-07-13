@@ -208,15 +208,15 @@ public class DicUtils {
             while (readString != null) {
                 dicLog(readString);
 
-                String[] row = readString.split(":");
+                String[] row = readString.split("[/^]");
                 if ( row[0].equals(CommConstants.tag_code_ins) ) {
                     DicDb.insCode(db, row[1], row[2], row[3]);
                 } else if ( row[0].equals(CommConstants.tag_voc_ins) ) {
                     DicDb.insDicVoc(db, row[1], row[2], row[3], row[4]);
                 } else if ( row[0].equals(CommConstants.tag_click_word_ins) ) {
                     DicDb.insDicClickWord(db, row[1], row[2]);
-                } else if ( row[0].equals(CommConstants.tag_novel_ins) ) {
-                    DicDb.insMyNovel(db, row[1], row[2], row[3], row[4]);
+                } else if ( row[0].equals(CommConstants.tag_news_ins) ) {
+                    DicDb.insNewsBackup(db, row[1], row[2], row[3], row[4], row[5], row[6]);
                 }
 
                 readString = buffreader.readLine();
@@ -968,6 +968,15 @@ public class DicUtils {
             al.add(idx++, getNewsInfo("Foreign Community - Activities","040101","http://koreajoongangdaily.joins.com/news/list/List.aspx?gCat=040101"));
             al.add(idx++, getNewsInfo("Foreign Community - Special Series","040401","http://koreajoongangdaily.joins.com/news/list/List.aspx?gCat=040401"));
         }else if ( newsCode.equals(CommConstants.news_TheChosunilbo)) {
+            al.add(idx++, getNewsInfo("National","11","http://english.chosun.com/svc/list_in/list.html?catid=11"));
+            al.add(idx++, getNewsInfo("Politics","12","http://english.chosun.com/svc/list_in/list.html?catid=12"));
+            al.add(idx++, getNewsInfo("North Korea","F","http://english.chosun.com/svc/list_in/list.html?catid=F"));
+            al.add(idx++, getNewsInfo("Business","21","http://english.chosun.com/svc/list_in/list.html?catid=21"));
+            al.add(idx++, getNewsInfo("Sci-Tech","22","http://english.chosun.com/svc/list_in/list.html?catid=22"));
+            al.add(idx++, getNewsInfo("Sports","3","http://english.chosun.com/svc/list_in/list.html?catid=3"));
+            al.add(idx++, getNewsInfo("Entertainment","45","http://english.chosun.com/svc/list_in/list.html?catid=45"));
+            al.add(idx++, getNewsInfo("Health","G1","http://english.chosun.com/svc/list_in/list.html?catid=G1"));
+            al.add(idx++, getNewsInfo("Lifestyle","G2","http://english.chosun.com/svc/list_in/list.html?catid=G2"));
         }else if ( newsCode.equals(CommConstants.news_TheKoreaherald)) {
             al.add(idx++, getNewsInfo("National - Politics","020101000000","http://www.koreaherald.com/list.php?ct=020101000000"));
             al.add(idx++, getNewsInfo("National - Social Affairs","020102000000","http://www.koreaherald.com/list.php?ct=020102000000"));
@@ -1063,7 +1072,32 @@ public class DicUtils {
                         break;
                     }
                 }
-            }else if ( newsCode.equals(CommConstants.news_TheChosunilbo)) {
+            } else if ( newsCode.equals(CommConstants.news_TheChosunilbo)) {
+                boolean isExistNews = false;
+                for ( int page = 0; page < 2; page ++ ) {
+                    Document doc = getDocument(url + (page > 0 ? "&pn=" + (page + 1) : ""));
+                    Elements es = doc.select("div#list_area dl.list_item");
+                    for (int i = 0; i < es.size(); i++) {
+                        String newsTitle = "";
+                        String newsUrl = "";
+                        String newsDesc = "";
+
+                        newsTitle = es.get(i).select("dt a").text();
+                        newsUrl = es.get(i).select("dt a").attr("href");
+                        newsDesc = es.get(i).select("dd.desc a").text();
+
+                        dicLog(newsTitle);
+                        //뉴스를 등록한다. 이미 있으면 로직 종료
+                        boolean exist = DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
+                        if (exist) {
+                            isExistNews = true;
+                            break;
+                        }
+                    }
+                    if ( isExistNews ) {
+                        break;
+                    }
+                }
             }else if ( newsCode.equals(CommConstants.news_TheKoreaherald)) {
                 boolean isExistNews = false;
                 for ( int page = 0; page < 2; page ++ ) {
@@ -1107,15 +1141,24 @@ public class DicUtils {
             if ( contents == null  || "".equals(contents) ) {
                 if ( newsCode.equals(CommConstants.news_KoreaJoongangDaily) ) {
                     Document doc = getDocument(url);
-                    DicUtils.dicLog(doc.html());
+                    //DicUtils.dicLog(doc.html());
 
                     Elements es = doc.select("div#articlebody");
                     if ( es.size() > 0 ) {
                         contents = removeHtmlTagFromContents(es.get(0).html());
 
-                        DicDb.insNewsContents(db, seq, contents);
+                        DicDb.updNewsContents(db, seq, contents);
                     }
                 }else if ( newsCode.equals(CommConstants.news_TheChosunilbo)) {
+                    Document doc = getDocument(url);
+                    //DicUtils.dicLog(doc.html());
+
+                    Elements es = doc.select("div.par");
+                    if ( es.size() > 0 ) {
+                        contents = removeHtmlTagFromContents(es.get(0).html());
+
+                        DicDb.updNewsContents(db, seq, contents);
+                    }
                 }else if ( newsCode.equals(CommConstants.news_TheKoreaherald)) {
                     Document doc = getDocument(url);
                     DicUtils.dicLog(doc.html());
@@ -1124,7 +1167,7 @@ public class DicUtils {
                     if ( es.size() > 0 ) {
                         contents = removeHtmlTagFromContents(es.get(0).html());
 
-                        DicDb.insNewsContents(db, seq, contents);
+                        DicDb.updNewsContents(db, seq, contents);
                     }
                 }
             }
@@ -1168,5 +1211,42 @@ public class DicUtils {
         newsInfo[2] = u;
 
         return newsInfo;
+    }
+
+    public static void setPreferences(Context mContext, String pref, String val) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(pref, val);
+        editor.commit();
+    }
+
+    public static String getPreferences(Context mContext, String pref, String defaultVal) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+        String val = prefs.getString(pref, defaultVal);
+
+        return val;
+    }
+
+    public static boolean equalPreferencesDate(Context mContext, String pref) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+        String date = prefs.getString(pref, "");
+        dicLog(pref + " : " + date);
+
+        if ( date.equals(getCurrentDate()) ) {
+            return true;
+        } else {
+            setPreferences(mContext, pref, getCurrentDate());
+            return false;
+        }
+    }
+
+    public static void initNewsPreferences(Context mContext) {
+        String[] news = getNews("C");
+        for ( int n = 0; n < news.length; n++) {
+            String[] newsCategory = getNewsCategory(news[n], "C");
+            for ( int c = 0; c < newsCategory.length; c++ ) {
+                setPreferences(mContext, news[n] + "_" + newsCategory[c], "-");
+            }
+        }
     }
 }

@@ -57,8 +57,8 @@ public class NewsClickWordActivity extends AppCompatActivity implements View.OnC
         fab.setVisibility(View.GONE);
 
         ActionBar ab = (ActionBar) getSupportActionBar();
-        //ab.setHomeButtonEnabled(true);
-        //ab.setDisplayHomeAsUpEnabled(true);
+        ab.setHomeButtonEnabled(true);
+        ab.setDisplayHomeAsUpEnabled(true);
 
         dbHelper = new DbHelper(this);
         db = dbHelper.getWritableDatabase();
@@ -177,7 +177,7 @@ public class NewsClickWordActivity extends AppCompatActivity implements View.OnC
                 if ( !adapter.isCheck() ) {
                     Toast.makeText(this, "선택된 데이타가 없습니다.", Toast.LENGTH_SHORT).show();
                 } else {
-                    new android.app.AlertDialog.Builder(this)
+                    new AlertDialog.Builder(this)
                             .setTitle("알림")
                             .setMessage("삭제하시겠습니까?")
                             .setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -379,6 +379,7 @@ class NewsClickwordCursorAdapter extends CursorAdapter {
         ((TextView) view.findViewById(R.id.my_tv_date)).setTextSize(fontSize);
         ((TextView) view.findViewById(R.id.my_tv_mean)).setTextSize(fontSize);
 
+        ((CheckBox)view.findViewById(R.id.my_cb_check)).setChecked(isCheck[cursor.getPosition()]);
         if ( isCheck[cursor.getPosition()] ) {
             ((CheckBox)view.findViewById(R.id.my_cb_check)).setButtonDrawable(android.R.drawable.checkbox_on_background);
         } else {

@@ -645,7 +645,15 @@ public class DicDb {
         return ( cnt > 0 ? true : false );
     }
 
-    public static void insNewsContents(SQLiteDatabase db, int seq, String contents) {
+    public static void insNewsBackup(SQLiteDatabase db, String newsCode, String categoryCode, String title, String desc, String url, String insDate) {
+        StringBuffer sql = new StringBuffer();
+        sql.append("INSERT INTO DIC_NEWS(NEWS, CATEGORY, TITLE, CONTENTS, DESC, URL, INS_DATE) " + CommConstants.sqlCR);
+        sql.append("VALUES ('" + newsCode + "','" + categoryCode + "','" + DicUtils.getQueryParam(title)+ "','','" + DicUtils.getQueryParam(desc) + "','" + url + "','" + insDate  + "')" + CommConstants.sqlCR);
+        DicUtils.dicSqlLog(sql.toString());
+        db.execSQL(sql.toString());
+    }
+
+    public static void updNewsContents(SQLiteDatabase db, int seq, String contents) {
         StringBuffer sql = new StringBuffer();
         sql.append("UPDATE  DIC_NEWS" + CommConstants.sqlCR);
         sql.append("SET     CONTENTS = '" + contents +"'" + CommConstants.sqlCR);
@@ -657,6 +665,14 @@ public class DicDb {
     public static void initNews(SQLiteDatabase db) {
         StringBuffer sql = new StringBuffer();
         sql.append("DELETE FROM DIC_NEWS" + CommConstants.sqlCR);
+        DicUtils.dicSqlLog(sql.toString());
+        db.execSQL(sql.toString());
+    }
+
+    public static void delOldNews(SQLiteDatabase db, String delDate) {
+        StringBuffer sql = new StringBuffer();
+        sql.append("DELETE  FROM DIC_NEWS" + CommConstants.sqlCR);
+        sql.append("WHERE   INS_DATE <= '" + delDate + "'" + CommConstants.sqlCR);
         DicUtils.dicSqlLog(sql.toString());
         db.execSQL(sql.toString());
     }

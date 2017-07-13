@@ -58,8 +58,8 @@ public class SentenceViewActivity extends AppCompatActivity implements View.OnCl
 
         ActionBar ab = getSupportActionBar();
         ab.setTitle("문장 상세");
-        //ab.setHomeButtonEnabled(true);
-        //ab.setDisplayHomeAsUpEnabled(true);
+        ab.setHomeButtonEnabled(true);
+        ab.setDisplayHomeAsUpEnabled(true);
 
         dbHelper = new DbHelper(this);
         db = dbHelper.getWritableDatabase();

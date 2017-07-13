@@ -62,8 +62,8 @@ public class Study2Activity extends AppCompatActivity implements View.OnClickLis
 
         ActionBar ab = getSupportActionBar();
         ab.setTitle(b.getString("studyKindName"));
-        //ab.setHomeButtonEnabled(true);
-        //ab.setDisplayHomeAsUpEnabled(true);
+        ab.setHomeButtonEnabled(true);
+        ab.setDisplayHomeAsUpEnabled(true);
 
         RadioButton rb_all = (RadioButton) findViewById(R.id.my_a_study2_rb_all);
         rb_all.setOnClickListener(this);

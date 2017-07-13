@@ -52,8 +52,8 @@ public class StudyActivity extends AppCompatActivity implements View.OnClickList
         fab.setVisibility(View.GONE);
 
         ActionBar ab = getSupportActionBar();
-        //ab.setHomeButtonEnabled(true);
-        //ab.setDisplayHomeAsUpEnabled(true);
+        ab.setHomeButtonEnabled(true);
+        ab.setDisplayHomeAsUpEnabled(true);
 
         dbHelper = new DbHelper(this);
         db = dbHelper.getWritableDatabase();

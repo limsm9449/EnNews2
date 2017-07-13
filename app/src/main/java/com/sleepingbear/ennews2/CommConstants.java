@@ -54,9 +54,9 @@ public class CommConstants {
         //History 등록
         public static String tag_click_word_ins = "C_CW_INS" ;
         //History 등록
-        public static String tag_novel_ins = "C_NOVEL_INS" ;
+        public static String tag_news_ins = "C_NEWS_INS" ;
 
-        public final static int a_news = 1;
+        public final static int a_setting = 1;
 
         public static String flag_mainNews = "MAIN_NEWS";
 
