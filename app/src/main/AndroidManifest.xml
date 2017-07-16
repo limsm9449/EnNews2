@@ -105,6 +105,11 @@
                 <action android:name="com.sleepingbear.ennew2.MySpeechService" />
             </intent-filter>
         </service>
+        <service android:name=".NewsTtsService">
+            <intent-filter>
+                <action android:name="com.sleepingbear.ennew2.NewsTtsService" />
+            </intent-filter>
+        </service>
 
     </application>
 

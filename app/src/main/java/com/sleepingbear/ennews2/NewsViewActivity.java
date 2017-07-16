@@ -161,6 +161,15 @@ public class NewsViewActivity extends AppCompatActivity implements View.OnClickL
             Intent helpIntent = new Intent(getApplication(), NewsHtmlViewActivity.class);
             helpIntent.putExtras(bundle);
             startActivity(helpIntent);
+        } else if (id == R.id.action_tts) {
+            Intent ttsIntent = new Intent(getApplicationContext(), NewsTtsService.class);
+            stopService(ttsIntent);
+
+            String[] sentences  = DicUtils.getSentencesArray(contents);
+
+            ttsIntent = new Intent(getApplicationContext(), NewsTtsService.class);
+            ttsIntent.putExtra("sentences", sentences);
+            startService(ttsIntent);
         } else if (id == R.id.action_help) {
             Bundle bundle = new Bundle();
             bundle.putString("SCREEN", CommConstants.screen_novelView);
@@ -171,6 +180,14 @@ public class NewsViewActivity extends AppCompatActivity implements View.OnClickL
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent ttsIntent = new Intent(getApplicationContext(), NewsTtsService.class);
+        stopService(ttsIntent);
+
+        finish();
     }
 
     @Override
@@ -208,6 +225,9 @@ public class NewsViewActivity extends AppCompatActivity implements View.OnClickL
     protected void onDestroy() {
         super.onDestroy();
         myTTS.shutdown();
+
+        Intent ttsIntent = new Intent(getApplicationContext(), NewsTtsService.class);
+        stopService(ttsIntent);
     }
 
     @Override
@@ -323,7 +343,7 @@ public class NewsViewActivity extends AppCompatActivity implements View.OnClickL
 
                 break;
             case R.id.action_all_copy:
-                webView.loadUrl("javascript:window.android.action('COPY', $('font').text())");
+                webView.loadUrl("javascript:window.android.action('COPY', $('#news_contents').text())");
 
                 break;
             case R.id.action_word_view:
@@ -343,7 +363,7 @@ public class NewsViewActivity extends AppCompatActivity implements View.OnClickL
 
                 break;
             case R.id.action_tts_all:
-                webView.loadUrl("javascript:window.android.action('TTS', $('font').text())");
+                webView.loadUrl("javascript:window.android.action('TTS', $('#news_contents').text())");
 
                 break;
             case R.id.action_tts:

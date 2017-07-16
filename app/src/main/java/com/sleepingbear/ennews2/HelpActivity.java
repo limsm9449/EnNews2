@@ -41,6 +41,16 @@ public class HelpActivity extends AppCompatActivity {
         }
 
         tempSb.delete(0, tempSb.length());
+        tempSb.append("* 어플 사용팁" + CommConstants.sqlCR);
+        tempSb.append("1. 하단 리스트 버튼으로 뉴스를 선택하세요." + CommConstants.sqlCR);
+        tempSb.append("2. 카테고리를 선택한 후에 뉴스를 클릭하세요." + CommConstants.sqlCR);
+        tempSb.append("3. 뉴스를 길게 클릭하면 뉴스 사이트로 이동합니다." + CommConstants.sqlCR);
+        tempSb.append("4. 뉴스를 보면서 클릭한 단어는 '뉴스 클릭 단어'에서 확인 할 수 있습니다." + CommConstants.sqlCR);
+        tempSb.append("5. '뉴스 클릭 단어' 화면에서 단어를 단어장에 등록해서 단어 학습을 하세요." + CommConstants.sqlCR);
+        tempSb.append("" + CommConstants.sqlCR);
+        allSb.append(tempSb.toString());
+
+        tempSb.delete(0, tempSb.length());
         tempSb.append("* 뉴스" + CommConstants.sqlCR);
         tempSb.append(" .오른쪽 하단의 리스트 버튼을 클릭해서 뉴스를 선택하세요. " + CommConstants.sqlCR);
         tempSb.append(" .뉴스를 선택하면 뉴스별 카테고리가 변경됩니다. " + CommConstants.sqlCR);
@@ -61,7 +71,7 @@ public class HelpActivity extends AppCompatActivity {
         tempSb.append(" .클릭단어의 뜻이 없을경우 하단 오른쪽의 검색 버튼을 클릭하면 Naver,Daum에서 단어 검색을 할 수 있습니다. " + CommConstants.sqlCR);
         tempSb.append(" .하단 단어를 길게 클릭하시면 단어 상세를 보실 수 있습니다." + CommConstants.sqlCR);
         tempSb.append(" .하단 단어 옆의 (+)를 클릭하시면 바로 단어장에 등록을 하실 수 있습니다." + CommConstants.sqlCR);
-        tempSb.append(" .뉴스의 단어를 길게 클릭하시면 단어보기, 단어검색(Naver,Daum), 번역, 문장보기, TTS, 전체TTS(4000자까지), 복사, 전체복사 기능을 사용하실 수 있습니다." + CommConstants.sqlCR);
+        tempSb.append(" .뉴스의 단어를 길게 클릭하시면 단어보기, 단어검색(Naver,Daum), 번역, 문장보기, TTS, 전체TTS, 복사, 전체복사 기능을 사용하실 수 있습니다." + CommConstants.sqlCR);
         tempSb.append(" .뉴스를 보면서 클릭한 단어는 '뉴스 클릭 단어' 화면에서 확인하실 수 있습니다." + CommConstants.sqlCR);
         tempSb.append("" + CommConstants.sqlCR);
         if ( screen.equals(CommConstants.screen_novelView) ) {

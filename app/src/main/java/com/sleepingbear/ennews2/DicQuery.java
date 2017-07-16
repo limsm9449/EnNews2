@@ -3,6 +3,10 @@ package com.sleepingbear.ennews2;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class DicQuery {
 
     public static String getWriteData() {

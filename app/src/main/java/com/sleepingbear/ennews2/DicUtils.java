@@ -26,6 +26,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 
@@ -753,7 +755,7 @@ public class DicUtils {
         sb.append("<script src='https://code.jquery.com/jquery-1.11.3.js'></script>");
         sb.append("<script>");
         sb.append("$( document ).ready(function() {");
-        sb.append("    $('#contents').html(function(index, oldHtml) {");
+        sb.append("    $('#news_title,#news_contents').html(function(index, oldHtml) {");
         sb.append("        return oldHtml.replace(/<[^>]*>/g, '').replace(/(<br>)/g, '\\n').replace(/\\b(\\w+?)\\b/g,'<span class=\"word\">$1</span>').replace(/\\n/g, '<br>')");
         sb.append("    });");
         sb.append("    $('.word').click(function(event) {");
@@ -763,10 +765,10 @@ public class DicUtils {
         sb.append("</script>");
 
         sb.append("<body>");
-        sb.append("<h3>");
+        sb.append("<h3 id='news_title'>");
         sb.append(title);
         sb.append("</h3>");
-        sb.append("<font size='" + fontSize + "' face='돋움'><div id='contents'>");
+        sb.append("<font size='" + fontSize + "' face='돋움'><div id='news_contents'>");
         sb.append(contents);
         sb.append("</div></font></body>");
         sb.append("</html>");
@@ -905,25 +907,29 @@ public class DicUtils {
     }
 
     public static String[] getNews(String kind) {
-        String[] news = new String[3];
+        String[] news = new String[4];
         int idx = 0;
 
         if ( "N".equals(kind) ) {
             news[idx++] = "Korea Joongang Daily";
-            news[idx++] = "The Chosunilbo";
             news[idx++] = "The Korea Herald";
+            news[idx++] = "The Korea Times";
+            news[idx++] = "The Chosunilbo";
         } else if ( "C".equals(kind) ) {
             news[idx++] = CommConstants.news_KoreaJoongangDaily;
+            news[idx++] = CommConstants.news_TheKoreaHerald;
+            news[idx++] = CommConstants.news_TheKoreaTimes;
             news[idx++] = CommConstants.news_TheChosunilbo;
-            news[idx++] = CommConstants.news_TheKoreaherald;
         } else if ( "U".equals(kind) ) {
-            news[idx++] = "http://koreajoongangdaily.joins.com/";
-            news[idx++] = "http://english.chosun.com/";
-            news[idx++] = "http://www.koreaherald.com/";
+            news[idx++] = "http://koreajoongangdaily.joins.com";
+            news[idx++] = "http://www.koreaherald.com";
+            news[idx++] = "http://www.koreatimes.co.kr";
+            news[idx++] = "http://english.chosun.com";
         } else if ( "W".equals(kind) ) {
             news[idx++] = "E002";
-            news[idx++] = "E001";
             news[idx++] = "E003";
+            news[idx++] = "E004";
+            news[idx++] = "E001";
         }
 
         return news;
@@ -977,7 +983,7 @@ public class DicUtils {
             al.add(idx++, getNewsInfo("Entertainment","45","http://english.chosun.com/svc/list_in/list.html?catid=45"));
             al.add(idx++, getNewsInfo("Health","G1","http://english.chosun.com/svc/list_in/list.html?catid=G1"));
             al.add(idx++, getNewsInfo("Lifestyle","G2","http://english.chosun.com/svc/list_in/list.html?catid=G2"));
-        }else if ( newsCode.equals(CommConstants.news_TheKoreaherald)) {
+        }else if ( newsCode.equals(CommConstants.news_TheKoreaHerald)) {
             al.add(idx++, getNewsInfo("National - Politics","020101000000","http://www.koreaherald.com/list.php?ct=020101000000"));
             al.add(idx++, getNewsInfo("National - Social Affairs","020102000000","http://www.koreaherald.com/list.php?ct=020102000000"));
             al.add(idx++, getNewsInfo("National - Foreign Affairs","020103000000","http://www.koreaherald.com/list.php?ct=020103000000"));
@@ -1024,6 +1030,85 @@ public class DicUtils {
             al.add(idx++, getNewsInfo("Opinion - Editorial","020601000000","http://www.koreaherald.com/list.php?ct=020601000000"));
             al.add(idx++, getNewsInfo("Opinion - Viewpoints","020603000000","http://www.koreaherald.com/list.php?ct=020603000000"));
             al.add(idx++, getNewsInfo("Opinion - Voice","020604000000","http://www.koreaherald.com/list.php?ct=020604000000"));
+        }else if ( newsCode.equals(CommConstants.news_TheKoreaTimes)) {
+            al.add(idx++, getNewsInfo("North Korea","103","http://www.koreatimes.co.kr/www/sublist_103.html"));
+
+            al.add(idx++, getNewsInfo("Entertainment - Music","682","http://www.koreatimes.co.kr/www/sublist_682.html"));
+            al.add(idx++, getNewsInfo("Entertainment - Dramas & TV shows","688","http://www.koreatimes.co.kr/www/sublist_688.html"));
+            al.add(idx++, getNewsInfo("Entertainment - Movies","689","http://www.koreatimes.co.kr/www/sublist_689.html"));
+            al.add(idx++, getNewsInfo("Entertainment - Performances","690","http://www.koreatimes.co.kr/www/sublist_690.html"));
+            al.add(idx++, getNewsInfo("Entertainment - Exhibitions","691","http://www.koreatimes.co.kr/www/sublist_691.html"));
+
+            al.add(idx++, getNewsInfo("Opinion - Editorial","202","http://www.koreatimes.co.kr/www/sublist_202.html"));
+            al.add(idx++, getNewsInfo("Opinion - Reporter`s Notebook","264","http://www.koreatimes.co.kr/www/sublist_264.html"));
+            al.add(idx++, getNewsInfo("Opinion - Guest Column","197","http://www.koreatimes.co.kr/www/sublist_197.html"));
+            al.add(idx++, getNewsInfo("Opinion - Thoughts of the Times","162","http://www.koreatimes.co.kr/www/sublist_162.html"));
+            al.add(idx++, getNewsInfo("Opinion - Letter to the Editor","161","http://www.koreatimes.co.kr/www/sublist_161.html"));
+            al.add(idx++, getNewsInfo("Opinion - Times Forum","198","http://www.koreatimes.co.kr/www/sublist_198.html"));
+
+            al.add(idx++, getNewsInfo("Economy - Policies","367","http://www.koreatimes.co.kr/www/sublist_367.html"));
+            al.add(idx++, getNewsInfo("Economy - Finance","488","http://www.koreatimes.co.kr/www/sublist_488.html"));
+
+            al.add(idx++, getNewsInfo("Biz & Tech - Automotive","419","http://www.koreatimes.co.kr/www/sublist_419.html"));
+            al.add(idx++, getNewsInfo("Biz & Tech - IT","133","http://www.koreatimes.co.kr/www/sublist_133.html"));
+            al.add(idx++, getNewsInfo("Biz & Tech - Heavy industries","693","http://www.koreatimes.co.kr/www/sublist_693.html"));
+            al.add(idx++, getNewsInfo("Biz & Tech - Light industries","694","http://www.koreatimes.co.kr/www/sublist_694.html"));
+            al.add(idx++, getNewsInfo("Biz & Tech - Science","325","http://www.koreatimes.co.kr/www/sublist_325.html"));
+            al.add(idx++, getNewsInfo("Biz & Tech - Game","134","http://www.koreatimes.co.kr/www/sublist_134.html"));
+
+            al.add(idx++, getNewsInfo("National - Politics","356","http://www.koreatimes.co.kr/www/sublist_356.html"));
+            al.add(idx++, getNewsInfo("National - Foreign Affairs","120","http://www.koreatimes.co.kr/www/sublist_120.html"));
+            al.add(idx++, getNewsInfo("National - Embassy News","176","http://www.koreatimes.co.kr/www/sublist_176.html"));
+            al.add(idx++, getNewsInfo("National - Defense Affairs","205","http://www.koreatimes.co.kr/www/sublist_205.html"));
+            al.add(idx++, getNewsInfo("National - Foreign Communities","177","http://www.koreatimes.co.kr/www/sublist_177.html"));
+            al.add(idx++, getNewsInfo("National - Investigations","251","http://www.koreatimes.co.kr/www/sublist_251.html"));
+            al.add(idx++, getNewsInfo("National - Diseases & welfare","119","http://www.koreatimes.co.kr/www/sublist_119.html"));
+            al.add(idx++, getNewsInfo("National - Labor & environment","371","http://www.koreatimes.co.kr/www/sublist_371.html"));
+            al.add(idx++, getNewsInfo("National - Education","181","http://www.koreatimes.co.kr/www/sublist_181.html"));
+            al.add(idx++, getNewsInfo("National - Seoul & provinces","281","http://www.koreatimes.co.kr/www/sublist_281.html"));
+            al.add(idx++, getNewsInfo("National - Obituaries","121","http://www.koreatimes.co.kr/www/sublist_121.html"));
+
+            al.add(idx++, getNewsInfo("Culture - Books","142","http://www.koreatimes.co.kr/www/sublist_142.html"));
+            al.add(idx++, getNewsInfo("Culture - Religions","293","http://www.koreatimes.co.kr/www/sublist_293.html"));
+            al.add(idx++, getNewsInfo("Culture - Healthcare","641","http://www.koreatimes.co.kr/www/sublist_641.html"));
+            al.add(idx++, getNewsInfo("Culture - Food","201","http://www.koreatimes.co.kr/www/sublist_201.html"));
+            al.add(idx++, getNewsInfo("Culture - Fortune Telling","148","http://www.koreatimes.co.kr/www/sublist_148.html"));
+            al.add(idx++, getNewsInfo("Culture - Hotel & Travel","141","http://www.koreatimes.co.kr/www/sublist_141.html"));
+            al.add(idx++, getNewsInfo("Culture - Fashion","199","http://www.koreatimes.co.kr/www/sublist_199.html"));
+            al.add(idx++, getNewsInfo("Culture - Korean traditions","317","http://www.koreatimes.co.kr/www/sublist_317.html"));
+            al.add(idx++, getNewsInfo("Culture - Trend","703","http://www.koreatimes.co.kr/www/sublist_703.html"));
+
+            al.add(idx++, getNewsInfo("Sports - Football","661","http://www.koreatimes.co.kr/www/sublist_661.html"));
+            al.add(idx++, getNewsInfo("Sports - Baseball","662","http://www.koreatimes.co.kr/www/sublist_662.html"));
+            al.add(idx++, getNewsInfo("Sports - Golf","159","http://www.koreatimes.co.kr/www/sublist_159.html"));
+            al.add(idx++, getNewsInfo("Sports - Other Sports","663","http://www.koreatimes.co.kr/www/sublist_663.html"));
+
+            al.add(idx++, getNewsInfo("World - SCMP","672","http://www.koreatimes.co.kr/www/sublist_672.html"));
+            al.add(idx++, getNewsInfo("World - Asia Pacific","683","http://www.koreatimes.co.kr/www/sublist_683.html"));
+            al.add(idx++, getNewsInfo("World - Americas","684","http://www.koreatimes.co.kr/www/sublist_684.html"));
+            al.add(idx++, getNewsInfo("World - Europe","685","http://www.koreatimes.co.kr/www/sublist_685.html"));
+
+            al.add(idx++, getNewsInfo("Columnists - Park Moo-jong","636","http://www.koreatimes.co.kr/www/sublist_636.html"));
+            al.add(idx++, getNewsInfo("Columnists - Choi Sung-jin","673","http://www.koreatimes.co.kr/www/sublist_673.html"));
+            al.add(idx++, getNewsInfo("Columnists - Tong Kim","167","http://www.koreatimes.co.kr/www/sublist_167.html"));
+            al.add(idx++, getNewsInfo("Columnists - Lee Seong-hyon","674","http://www.koreatimes.co.kr/www/sublist_674.html"));
+            al.add(idx++, getNewsInfo("Columnists - Andrew Salmon","351","http://www.koreatimes.co.kr/www/sublist_351.html"));
+            al.add(idx++, getNewsInfo("Columnists - John Burton","396","http://www.koreatimes.co.kr/www/sublist_396.html"));
+            al.add(idx++, getNewsInfo("Columnists - Jason Lim","352","http://www.koreatimes.co.kr/www/sublist_352.html"));
+            al.add(idx++, getNewsInfo("Columnists - Donald Kirk","353","http://www.koreatimes.co.kr/www/sublist_353.html"));
+            al.add(idx++, getNewsInfo("Columnists - Kim Ji-myung","355","http://www.koreatimes.co.kr/www/sublist_355.html"));
+            al.add(idx++, getNewsInfo("Columnists - Andrei Lankov","304","http://www.koreatimes.co.kr/www/sublist_304.html"));
+            al.add(idx++, getNewsInfo("Columnists - Michael Breen","170","http://www.koreatimes.co.kr/www/sublist_170.html"));
+            al.add(idx++, getNewsInfo("Columnists - Frank Ching","171","http://www.koreatimes.co.kr/www/sublist_171.html"));
+            al.add(idx++, getNewsInfo("Columnists - Hyon O'Brien","256","http://www.koreatimes.co.kr/www/sublist_256.html"));
+            al.add(idx++, getNewsInfo("Columnists - Younghoy Kim Kimaro","614","http://www.koreatimes.co.kr/www/sublist_614.html"));
+            al.add(idx++, getNewsInfo("Columnists - Michael McManus","620","http://www.koreatimes.co.kr/www/sublist_620.html"));
+            al.add(idx++, getNewsInfo("Columnists - Deauwand Myers","621","http://www.koreatimes.co.kr/www/sublist_621.html"));
+            al.add(idx++, getNewsInfo("Columnists - Bernard Rowan","625","http://www.koreatimes.co.kr/www/sublist_625.html"));
+            al.add(idx++, getNewsInfo("Columnists - Casey Lartigue, Jr.","626","http://www.koreatimes.co.kr/www/sublist_626.html"));
+            al.add(idx++, getNewsInfo("Columnists - Stephen Costello","637","http://www.koreatimes.co.kr/www/sublist_637.html"));
+            al.add(idx++, getNewsInfo("Columnists - Semoon Chang","652","http://www.koreatimes.co.kr/www/sublist_652.html"));
+            al.add(idx++, getNewsInfo("Columnists - Korean Historical Sense","633","http://www.koreatimes.co.kr/www/sublist_633.html"));
         }
 
         category = new String[al.size()];
@@ -1052,12 +1137,12 @@ public class DicUtils {
                         String newsUrl = "";
                         String newsDesc = "";
 
-                        if (es.select("a.title_cr").size() > 0) {
-                            newsTitle = es.select("a.title_cr").get(i).text();
-                            newsUrl = "http://koreajoongangdaily.joins.com/" + es.select("a.title_cr").get(i).attr("href");
+                        if (es.get(i).select("a.title_cr").size() > 0) {
+                            newsTitle = es.get(i).select("a.title_cr").text();
+                            newsUrl = "http://koreajoongangdaily.joins.com" + es.get(i).select("a.title_cr").attr("href");
                         }
-                        if (es.select("a.read_cr").size() > 0) {
-                            newsDesc = es.select("a.read_cr").get(i).text();
+                        if (es.get(i).select("a.read_cr").size() > 0) {
+                            newsDesc = es.get(i).select("a.read_cr").text();
                         }
 
                         dicLog(newsTitle);
@@ -1083,7 +1168,7 @@ public class DicUtils {
                         String newsDesc = "";
 
                         newsTitle = es.get(i).select("dt a").text();
-                        newsUrl = es.get(i).select("dt a").attr("href");
+                        newsUrl = "http://english.chosun.com" + es.get(i).select("dt a").attr("href");
                         newsDesc = es.get(i).select("dd.desc a").text();
 
                         dicLog(newsTitle);
@@ -1098,7 +1183,7 @@ public class DicUtils {
                         break;
                     }
                 }
-            }else if ( newsCode.equals(CommConstants.news_TheKoreaherald)) {
+            } else if ( newsCode.equals(CommConstants.news_TheKoreaHerald)) {
                 boolean isExistNews = false;
                 for ( int page = 0; page < 2; page ++ ) {
                     Document doc = getDocument(url + (page > 0 ? "&pgi=" + (page + 1) : ""));
@@ -1108,12 +1193,48 @@ public class DicUtils {
                         String newsUrl = "";
                         String newsDesc = "";
 
-                        if (es.select("details h3 a").size() > 0) {
-                            newsTitle = es.select("details h3 a").get(i).text();
-                            newsUrl = es.select("details h3 a").get(i).attr("href");
+                        if (es.get(i).select("details h3 a").size() > 0) {
+                            newsTitle = es.get(i).select("details h3 a").text();
+                            newsUrl = es.get(i).select("details h3 a").attr("href");
                         }
-                        if (es.select("details p a").size() > 0) {
-                            newsDesc = es.select("details p a").get(i).text();
+                        if (es.get(i).select("details p a").size() > 0) {
+                            newsDesc = es.get(i).select("details p a").text();
+                        }
+
+                        dicLog(newsTitle);
+                        //뉴스를 등록한다. 이미 있으면 로직 종료
+                        boolean exist = DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
+                        if (exist) {
+                            isExistNews = true;
+                            break;
+                        }
+                    }
+                    if ( isExistNews ) {
+                        break;
+                    }
+                }
+            } else if ( newsCode.equals(CommConstants.news_TheKoreaTimes)) {
+                boolean isExistNews = false;
+                for ( int page = 0; page < 2; page ++ ) {
+                    Document doc;
+                    if ( page > 0 ) {
+                        doc = getDocument(url.substring(0, url.length() - 5) + "_" + (page + 1) + url.substring(url.length() - 5, url.length()));
+                    } else {
+                        doc = getDocument(url);
+                    }
+
+                    Elements es = doc.select("div.list_article_area");
+                    for (int i = 0; i < es.size(); i++) {
+                        String newsTitle = "";
+                        String newsUrl = "";
+                        String newsDesc = "";
+
+                        if (es.get(i).select("div.list_article_headline a").size() > 0) {
+                            newsTitle = es.get(i).select("div.list_article_headline a").text();
+                            newsUrl = "http://www.koreatimes.co.kr" + es.get(i).select("div.list_article_headline a").attr("href");
+                        }
+                        if (es.get(i).select("div.list_article_lead a").size() > 0) {
+                            newsDesc = es.get(i).select("div.list_article_lead a").text();
                         }
 
                         dicLog(newsTitle);
@@ -1154,16 +1275,25 @@ public class DicUtils {
                     //DicUtils.dicLog(doc.html());
 
                     Elements es = doc.select("div.par");
+                    for ( int i = 0; i < es.size(); i++ ) {
+                        contents += removeHtmlTagFromContents(es.get(i).html()) + "\n";
+                    }
+                    DicDb.updNewsContents(db, seq, contents);
+                }else if ( newsCode.equals(CommConstants.news_TheKoreaHerald)) {
+                    Document doc = getDocument(url);
+                    //DicUtils.dicLog(doc.html());
+
+                    Elements es = doc.select("div#articleText");
                     if ( es.size() > 0 ) {
                         contents = removeHtmlTagFromContents(es.get(0).html());
 
                         DicDb.updNewsContents(db, seq, contents);
                     }
-                }else if ( newsCode.equals(CommConstants.news_TheKoreaherald)) {
+                }else if ( newsCode.equals(CommConstants.news_TheKoreaTimes)) {
                     Document doc = getDocument(url);
-                    DicUtils.dicLog(doc.html());
+                    //DicUtils.dicLog(doc.html());
 
-                    Elements es = doc.select("div#articleText");
+                    Elements es = doc.select("div#startts");
                     if ( es.size() > 0 ) {
                         contents = removeHtmlTagFromContents(es.get(0).html());
 
@@ -1201,7 +1331,7 @@ public class DicUtils {
             }
         }
 
-        return contents;
+        return contents.replaceAll("&nbsp;","");
     }
 
     public static String[] getNewsInfo(String c, String n, String u) {
@@ -1248,5 +1378,21 @@ public class DicUtils {
                 setPreferences(mContext, news[n] + "_" + newsCategory[c], "-");
             }
         }
+    }
+
+    public static String[] getSentencesArray(String str) {
+        ArrayList al = new ArrayList();
+        Pattern re = Pattern.compile("[^.!?\\s][^.!?]*(?:[.!?](?!['\"]?\\s|$)[^.!?]*)*[.!?]?['\"]?(?=\\s|$)", Pattern.MULTILINE | Pattern.COMMENTS);
+        Matcher reMatcher = re.matcher(str);
+        while (reMatcher.find()) {
+            dicLog(reMatcher.group());
+            al.add(reMatcher.group());
+        }
+
+        String[] rtn = new String[al.size()];
+        for ( int i = 0; i < al.size(); i++ ) {
+            rtn[i] = (String)al.get(i);
+        }
+        return rtn;
     }
 }

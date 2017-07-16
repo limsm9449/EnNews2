@@ -144,6 +144,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         String[] newCodes = DicUtils.getNews("C");
         changeSpinner(newCodes[sNews], sCategory);
+
+        // 사용법 Dialog...
+        String appHintDialog = "20170711";
+        int appHintDialogCount = prefs.getInt("appHintDialogCount", 3);
+        //DicUtils.dicLog("appHintDialogCount : " + appHintDialogCount);
+        boolean showDialog = false;
+        if ( !appHintDialog.equals(prefs.getString("appHintDialog", "N")) ) {
+            showDialog = true;
+
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("appHintDialog", appHintDialog);
+            editor.putInt("appHintDialogCount", 2);
+            appHintDialogCount = 2;
+            editor.commit();
+        } else if ( appHintDialogCount == 1 || appHintDialogCount == 2 || appHintDialogCount == 3 ) {
+            showDialog = true;
+
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("appHintDialog", appHintDialog);
+            editor.putInt("appHintDialogCount", --appHintDialogCount);
+            editor.commit();
+        }
+        if ( showDialog ) {
+            String msg = "1. 하단 리스트 버튼으로 뉴스를 선택하세요.\n";
+            msg += "2. 카테고리를 선택한 후에 뉴스를 클릭하세요.\n";
+            msg += "3. 뉴스를 길게 클릭하면 뉴스 사이트로 이동합니다.\n";
+            msg += "4. 뉴스를 보면서 클릭한 단어는 '뉴스 클릭 단어'에서 확인 할 수 있습니다.\n";
+            msg += "5. '뉴스 클릭 단어' 화면에서 단어를 단어장에 등록해서 단어 학습을 하세요.\n";
+
+            new AlertDialog.Builder(this)
+                    .setTitle("알림" + (appHintDialogCount >= 0 ? " - " + ++appHintDialogCount : ""))
+                    .setMessage(msg)
+                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .show();
+        }
     }
 
     public void changeSpinner(String newsCode, int pos) {

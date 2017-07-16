@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="최고의 영어신문2"
+        android:text="최고의 영어신문 Ver.2"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
