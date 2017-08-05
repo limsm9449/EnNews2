@@ -65,4 +65,5 @@ public class CommConstants {
         public static String news_TheChosunilbo = "N02";
         public static String news_TheKoreaHerald = "N03";
         public static String news_TheKoreaTimes = "N04";
+        public static String news_reuters = "N05";
     }
