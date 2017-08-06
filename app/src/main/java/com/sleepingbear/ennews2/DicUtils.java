@@ -14,6 +14,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -909,7 +911,7 @@ public class DicUtils {
     }
 
     public static String[] getNews(String kind) {
-        String[] news = new String[6];
+        String[] news = new String[7];
         int idx = 0;
 
         if ( "N".equals(kind) ) {
@@ -917,8 +919,9 @@ public class DicUtils {
             news[idx++] = "The Korea Herald";
             news[idx++] = "The Korea Times";
             news[idx++] = "The Chosunilbo";
-            news[idx++] = "reuters";
-            news[idx++] = "abc News";
+            news[idx++] = "Reuters";
+            news[idx++] = "ABC News";
+            news[idx++] = "BBC News";
         } else if ( "C".equals(kind) ) {
             news[idx++] = CommConstants.news_KoreaJoongangDaily;
             news[idx++] = CommConstants.news_TheKoreaHerald;
@@ -926,6 +929,7 @@ public class DicUtils {
             news[idx++] = CommConstants.news_TheChosunilbo;
             news[idx++] = CommConstants.news_reuters;
             news[idx++] = CommConstants.news_abcNews;
+            news[idx++] = CommConstants.news_bbcNews;
         } else if ( "U".equals(kind) ) {
             news[idx++] = "http://koreajoongangdaily.joins.com";
             news[idx++] = "http://www.koreaherald.com";
@@ -933,6 +937,7 @@ public class DicUtils {
             news[idx++] = "http://english.chosun.com";
             news[idx++] = "http://www.reuters.com/";
             news[idx++] = "http://abcnews.go.com/";
+            news[idx++] = "http://www.bbc.com/";
         } else if ( "W".equals(kind) ) {
             news[idx++] = "E002";
             news[idx++] = "E003";
@@ -940,6 +945,7 @@ public class DicUtils {
             news[idx++] = "E001";
             news[idx++] = "E010";
             news[idx++] = "E005";
+            news[idx++] = "E006";
         }
 
         return news;
@@ -1184,6 +1190,49 @@ public class DicUtils {
             al.add(idx++, getNewsInfo("Entertainment",CommConstants.news_abcNews + "_" + cIdx++,"http://abcnews.go.com/Entertainment"));
             al.add(idx++, getNewsInfo("Health",CommConstants.news_abcNews + "_" + cIdx++,"http://abcnews.go.com/Health"));
             al.add(idx++, getNewsInfo("Technology",CommConstants.news_abcNews + "_" + cIdx++,"http://abcnews.go.com/Technology"));
+        } else if ( newsCode.equals(CommConstants.news_bbcNews)) {
+            int cIdx = 1;
+
+            al.add(idx++, getNewsInfo("World Home",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/world/rss.xml"));
+            al.add(idx++, getNewsInfo("Africa",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/world/africa/rss.xml"));
+            al.add(idx++, getNewsInfo("Australia",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/world/australia/rss.xml"));
+            al.add(idx++, getNewsInfo("Europe",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/world/europe/rss.xml"));
+            al.add(idx++, getNewsInfo("Latin America",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/world/latin_america/rss.xml"));
+            al.add(idx++, getNewsInfo("Middle East",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/world/middle_east/rss.xml"));
+            al.add(idx++, getNewsInfo("US & Canada",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml"));
+
+            al.add(idx++, getNewsInfo("Asia",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/world/asia/rss.xml"));
+            al.add(idx++, getNewsInfo("China",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/world/asia/china/rss.xml"));
+            al.add(idx++, getNewsInfo("India",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/world/asia/india/rss.xml"));
+
+            al.add(idx++, getNewsInfo("Uk",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/uk/rss.xml"));
+            al.add(idx++, getNewsInfo("England",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/england/rss.xml"));
+            al.add(idx++, getNewsInfo("N.Ireland",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/northern_ireland/rss.xml"));
+            al.add(idx++, getNewsInfo("Scotland",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/scotland/rss.xml"));
+            al.add(idx++, getNewsInfo("Edinburgh, Fife & East",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/scotland/edinburgh_east_and_fife/rss.xml"));
+            al.add(idx++, getNewsInfo("Glasgow & West",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/scotland/glasgow_and_west/rss.xml"));
+            al.add(idx++, getNewsInfo("Highlands & Islands",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/scotland/highlands_and_islands/rss.xml"));
+            al.add(idx++, getNewsInfo("NE, Orkney & Shetland",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/scotland/north_east_orkney_and_shetland/rss.xml"));
+            al.add(idx++, getNewsInfo("South",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/scotland/south_scotland/rss.xml"));
+            al.add(idx++, getNewsInfo("Tayside & Central",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/scotland/tayside_and_central/rss.xml"));
+
+            al.add(idx++, getNewsInfo("Wales",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/wales/rss.xml"));
+            al.add(idx++, getNewsInfo("Wales Politics",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/wales/wales_politics/rss.xml"));
+            al.add(idx++, getNewsInfo("Wales North West",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/wales/north_west_wales/rss.xml"));
+            al.add(idx++, getNewsInfo("Wales North East",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/wales/north_east_wales/rss.xml"));
+            al.add(idx++, getNewsInfo("Wales Mid",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/wales/mid_wales/rss.xml"));
+            al.add(idx++, getNewsInfo("Wales South West",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/wales/south_west_wales/rss.xml"));
+            al.add(idx++, getNewsInfo("Wales South East",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/wales/south_east_wales/rss.xml"));
+            al.add(idx++, getNewsInfo("Politics",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/politics/rss.xml"));
+            al.add(idx++, getNewsInfo("Brexit",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/politics/uk_leaves_the_eu/rss.xml"));
+
+            al.add(idx++, getNewsInfo("Business",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/business/rss.xml"));
+            al.add(idx++, getNewsInfo("Companies",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/business/companies/rss.xml"));
+            al.add(idx++, getNewsInfo("Technology",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/technology/rss.xml"));
+            al.add(idx++, getNewsInfo("Magazine",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/magazine/rss.xml"));
+            al.add(idx++, getNewsInfo("Entertainment & Arts",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml"));
+            al.add(idx++, getNewsInfo("Health",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/health/rss.xml"));
+            al.add(idx++, getNewsInfo("Politics",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/politics/rss.xml"));
         }
 
         category = new String[al.size()];
@@ -1479,6 +1528,64 @@ public class DicUtils {
 
                     DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
                 }
+            } else if ( newsCode.equals(CommConstants.news_bbcNews)) {
+                String newsTitle = "";
+                String newsUrl = "";
+                String newsDesc = "";
+
+                try{
+                    // XML 데이터를 읽어옴
+                    URL urlObj = new URL(url);
+                    InputStream in = urlObj.openStream();
+
+                    XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+                    XmlPullParser parser = factory.newPullParser();
+
+                    // XmlPullParser에 XML 데이터와 인코딩 방식을 입력
+                    parser.setInput(in, "euc-kr");
+
+                    int eventType = parser.getEventType();
+                    boolean isItemTag = false;
+                    boolean isTagStart = false;
+                    String tagName = "";
+                    while ( eventType != XmlPullParser.END_DOCUMENT ) {
+                        if ( eventType == XmlPullParser.START_TAG ) {
+                            tagName = parser.getName();
+                            if ( tagName.equals("item") ) {
+                                isItemTag = true;
+                            }
+                            isTagStart = true;
+                            dicLog(tagName + " start");
+                        } else if ( eventType == XmlPullParser.TEXT && isItemTag && isTagStart ) {
+                            dicLog(tagName + " text");
+                            if(tagName.equals("title"))
+                                newsTitle = parser.getText();
+
+                            if(tagName.equals("link"))
+                                newsUrl = parser.getText();
+
+                            if(tagName.equals("description"))
+                                newsDesc = parser.getText();
+                            dicLog(newsTitle + " : " + newsUrl + " : " + newsDesc);
+                        } else if(eventType == XmlPullParser.END_TAG){
+                            tagName = parser.getName();
+                            isTagStart = false;
+                            dicLog(tagName + " end");
+                            if(tagName.equals("item")){
+                                DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
+
+                                newsTitle = "";
+                                newsUrl = "";
+                                newsDesc = "";
+                                isItemTag = false;
+                            }
+                        }
+
+                        eventType = parser.next();
+                    }
+                } catch(Exception e) {
+                    dicLog(e.toString());
+                }
             }
         } catch ( Exception e ) {
             Log.d(CommConstants.tag, e.getMessage());
@@ -1544,6 +1651,16 @@ public class DicUtils {
                     //DicUtils.dicLog(doc.html());
 
                     Elements es = doc.select("div.article-body div.article-copy p");
+                    for (int i = 0; i < es.size(); i++) {
+                        contents += es.get(i).text() + "\n\n";
+                    }
+
+                    DicDb.updNewsContents(db, seq, removeHtmlTagFromContents(contents));
+                } else if ( newsCode.equals(CommConstants.news_bbcNews)) {
+                    Document doc = getDocument(url);
+                    //DicUtils.dicLog(doc.html());
+
+                    Elements es = doc.select("div.story-body div.story-body__inner p");
                     for (int i = 0; i < es.size(); i++) {
                         contents += es.get(i).text() + "\n\n";
                     }
