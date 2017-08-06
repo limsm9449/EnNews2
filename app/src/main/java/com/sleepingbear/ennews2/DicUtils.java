@@ -909,7 +909,7 @@ public class DicUtils {
     }
 
     public static String[] getNews(String kind) {
-        String[] news = new String[5];
+        String[] news = new String[6];
         int idx = 0;
 
         if ( "N".equals(kind) ) {
@@ -918,23 +918,27 @@ public class DicUtils {
             news[idx++] = "The Korea Times";
             news[idx++] = "The Chosunilbo";
             news[idx++] = "reuters";
+            news[idx++] = "abc News";
         } else if ( "C".equals(kind) ) {
             news[idx++] = CommConstants.news_KoreaJoongangDaily;
             news[idx++] = CommConstants.news_TheKoreaHerald;
             news[idx++] = CommConstants.news_TheKoreaTimes;
             news[idx++] = CommConstants.news_TheChosunilbo;
             news[idx++] = CommConstants.news_reuters;
+            news[idx++] = CommConstants.news_abcNews;
         } else if ( "U".equals(kind) ) {
             news[idx++] = "http://koreajoongangdaily.joins.com";
             news[idx++] = "http://www.koreaherald.com";
             news[idx++] = "http://www.koreatimes.co.kr";
             news[idx++] = "http://english.chosun.com";
             news[idx++] = "http://www.reuters.com/";
+            news[idx++] = "http://abcnews.go.com/";
         } else if ( "W".equals(kind) ) {
             news[idx++] = "E002";
             news[idx++] = "E003";
             news[idx++] = "E004";
             news[idx++] = "E001";
+            news[idx++] = "E010";
             news[idx++] = "E005";
         }
 
@@ -1118,7 +1122,7 @@ public class DicUtils {
         } else if ( newsCode.equals(CommConstants.news_reuters)) {
             int cIdx = 1;
 
-            al.add(idx++, getNewsInfo("Business",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/finance"));
+            al.add(idx++, getNewsInfo("Business Home",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/finance"));
             al.add(idx++, getNewsInfo("Business - Legal",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/legal"));
             al.add(idx++, getNewsInfo("Business - Deal",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/finance/deals"));
             al.add(idx++, getNewsInfo("Business - Aerospace & Defense",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/subjects/aerospace-and-defense"));
@@ -1127,7 +1131,7 @@ public class DicUtils {
             al.add(idx++, getNewsInfo("Business - Autos",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/subjects/autos"));
             al.add(idx++, getNewsInfo("Business - Adventures",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/news/subjects/ADventures"));
 
-            al.add(idx++, getNewsInfo("Markets",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/finance/markets"));
+            al.add(idx++, getNewsInfo("Markets Home",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/finance/markets"));
             al.add(idx++, getNewsInfo("Markets - U.S.",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/finance/markets/us"));
             al.add(idx++, getNewsInfo("Markets - European",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/finance/markets/europe"));
             al.add(idx++, getNewsInfo("Markets - Asian",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/finance/markets/asia"));
@@ -1135,7 +1139,7 @@ public class DicUtils {
             al.add(idx++, getNewsInfo("Markets - Earnings",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/finance/EarningsUS"));
             al.add(idx++, getNewsInfo("Markets - Bonds",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/finance/bonds"));
 
-            al.add(idx++, getNewsInfo("World",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/news/world"));
+            al.add(idx++, getNewsInfo("World Home",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/news/world"));
             al.add(idx++, getNewsInfo("World - U.S.",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/news/us"));
             al.add(idx++, getNewsInfo("World - Special Reports",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/subjects/specialReports"));
             al.add(idx++, getNewsInfo("World - Mexico",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/places/mexico"));
@@ -1148,10 +1152,10 @@ public class DicUtils {
             al.add(idx++, getNewsInfo("World - Japan",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/places/japan"));
             al.add(idx++, getNewsInfo("World - India",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/places/india"));
 
-            al.add(idx++, getNewsInfo("Politics",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/politics"));
+            al.add(idx++, getNewsInfo("Politics Home",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/politics"));
             al.add(idx++, getNewsInfo("Politics - Supreme Court",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/subjects/supreme-court"));
 
-            al.add(idx++, getNewsInfo("Technology",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/news/technology"));
+            al.add(idx++, getNewsInfo("Technology Home",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/news/technology"));
             al.add(idx++, getNewsInfo("Technology - Science",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/news/science"));
             al.add(idx++, getNewsInfo("Technology - Media",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/news/media"));
             al.add(idx++, getNewsInfo("Technology - Energy And Environment",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/energy-environment"));
@@ -1161,15 +1165,25 @@ public class DicUtils {
 
             al.add(idx++, getNewsInfo("Breakingviews",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/breakingviews"));
 
-            al.add(idx++, getNewsInfo("Money",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/finance/personal-finance"));
+            al.add(idx++, getNewsInfo("Money Home",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/finance/personal-finance"));
             al.add(idx++, getNewsInfo("Money - Retirement",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/finance/personal-finance/retirement"));
 
-            al.add(idx++, getNewsInfo("Lifestyle",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/news/lifestyle"));
+            al.add(idx++, getNewsInfo("Lifestyle Home",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/news/lifestyle"));
             al.add(idx++, getNewsInfo("Lifestyle - Health",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/news/health"));
             al.add(idx++, getNewsInfo("Lifestyle - Sports",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/news/sports"));
             al.add(idx++, getNewsInfo("Lifestyle - Arts",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/news/entertainment/arts"));
             al.add(idx++, getNewsInfo("Lifestyle - Entertainment",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/news/entertainment"));
             al.add(idx++, getNewsInfo("Lifestyle - Oddly Enough",CommConstants.news_reuters + "_" + cIdx++,"http://www.reuters.com/news/oddlyEnough"));
+        } else if ( newsCode.equals(CommConstants.news_abcNews)) {
+            int cIdx = 1;
+
+            al.add(idx++, getNewsInfo("U.S.",CommConstants.news_abcNews + "_" + cIdx++,"http://abcnews.go.com/US"));
+            al.add(idx++, getNewsInfo("International",CommConstants.news_abcNews + "_" + cIdx++,"http://abcnews.go.com/International"));
+            al.add(idx++, getNewsInfo("Politics",CommConstants.news_abcNews + "_" + cIdx++,"http://abcnews.go.com/Politics"));
+            al.add(idx++, getNewsInfo("Lifestyle",CommConstants.news_abcNews + "_" + cIdx++,"http://abcnews.go.com/Lifestyle"));
+            al.add(idx++, getNewsInfo("Entertainment",CommConstants.news_abcNews + "_" + cIdx++,"http://abcnews.go.com/Entertainment"));
+            al.add(idx++, getNewsInfo("Health",CommConstants.news_abcNews + "_" + cIdx++,"http://abcnews.go.com/Health"));
+            al.add(idx++, getNewsInfo("Technology",CommConstants.news_abcNews + "_" + cIdx++,"http://abcnews.go.com/Technology"));
         }
 
         category = new String[al.size()];
@@ -1206,8 +1220,6 @@ public class DicUtils {
                             newsDesc = es.get(i).select("a.read_cr").text();
                         }
 
-                        dicLog(newsTitle);
-                        //뉴스를 등록한다. 이미 있으면 로직 종료
                         boolean exist = DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
                         if (exist) {
                             isExistNews = true;
@@ -1232,8 +1244,6 @@ public class DicUtils {
                         newsUrl = "http://english.chosun.com" + es.get(i).select("dt a").attr("href");
                         newsDesc = es.get(i).select("dd.desc a").text();
 
-                        dicLog(newsTitle);
-                        //뉴스를 등록한다. 이미 있으면 로직 종료
                         boolean exist = DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
                         if (exist) {
                             isExistNews = true;
@@ -1262,8 +1272,6 @@ public class DicUtils {
                             newsDesc = es.get(i).select("details p a").text();
                         }
 
-                        dicLog(newsTitle);
-                        //뉴스를 등록한다. 이미 있으면 로직 종료
                         boolean exist = DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
                         if (exist) {
                             isExistNews = true;
@@ -1298,8 +1306,6 @@ public class DicUtils {
                             newsDesc = es.get(i).select("div.list_article_lead a").text();
                         }
 
-                        dicLog(newsTitle);
-                        //뉴스를 등록한다. 이미 있으면 로직 종료
                         boolean exist = DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
                         if (exist) {
                             isExistNews = true;
@@ -1311,7 +1317,6 @@ public class DicUtils {
                     }
                 }
             } else if ( newsCode.equals(CommConstants.news_reuters)) {
-                boolean isExistNews = false;
                 Document doc = getDocument(url);
                 String newsTitle = "";
                 String newsUrl = "";
@@ -1327,9 +1332,7 @@ public class DicUtils {
                         newsDesc = es.get(i).select("p").text();
                     }
 
-                    dicLog(newsTitle);
-                    //뉴스를 등록한다. 이미 있으면 로직 종료
-                    boolean exist = DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
+                    DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
                 }
 
                 es = doc.select("div.column1 div.moduleBody div.topStory");
@@ -1342,9 +1345,7 @@ public class DicUtils {
                         newsDesc = es.get(i).select("p").text();
                     }
 
-                    dicLog(newsTitle);
-                    //뉴스를 등록한다. 이미 있으면 로직 종료
-                    boolean exist = DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
+                    DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
                 }
 
                 es = doc.select("div.column1 div.moduleBody div.feature");
@@ -1361,9 +1362,7 @@ public class DicUtils {
                         continue;
                     }
 
-                    dicLog(newsTitle);
-                    //뉴스를 등록한다. 이미 있으면 로직 종료
-                    boolean exist = DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
+                    DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
                 }
 
                 es = doc.select("div#moreSectionNews div.moduleBody div.topStory");
@@ -1376,9 +1375,7 @@ public class DicUtils {
                         newsDesc = es.get(i).select("p").text();
                     }
 
-                    dicLog(newsTitle);
-                    //뉴스를 등록한다. 이미 있으면 로직 종료
-                    boolean exist = DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
+                    DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
                 }
 
                 es = doc.select("div.column1 div.moduleBody ul li");
@@ -1389,9 +1386,7 @@ public class DicUtils {
                     }
                     newsDesc = "";
 
-                    dicLog(newsTitle);
-                    //뉴스를 등록한다. 이미 있으면 로직 종료
-                    boolean exist = DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
+                    DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
                 }
 
                 es = doc.select("div.column2 div.moduleBody div.feature");
@@ -1404,9 +1399,7 @@ public class DicUtils {
                         newsDesc = es.get(i).select("p").text();
                     }
 
-                    dicLog(newsTitle);
-                    //뉴스를 등록한다. 이미 있으면 로직 종료
-                    boolean exist = DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
+                    DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
                 }
 
                 es = doc.select("div.column2 div.moduleBody ul li");
@@ -1421,9 +1414,7 @@ public class DicUtils {
                         continue;
                     }
 
-                    dicLog(newsTitle);
-                    //뉴스를 등록한다. 이미 있으면 로직 종료
-                    boolean exist = DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
+                    DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
                 }
 
                 es = doc.select("div.column1 article.story");
@@ -1436,9 +1427,57 @@ public class DicUtils {
                         newsDesc = es.get(i).select("p").text();
                     }
 
-                    dicLog(newsTitle);
-                    //뉴스를 등록한다. 이미 있으면 로직 종료
-                    boolean exist = DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
+                    DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
+                }
+            } else if ( newsCode.equals(CommConstants.news_abcNews)) {
+                Document doc = getDocument(url);
+                String newsTitle = "";
+                String newsUrl = "";
+                String newsDesc = "";
+
+                Elements es = doc.select("div.caption-wrapper");
+                for (int i = 0; i < es.size(); i++) {
+                    if (es.get(i).select("h1 a").size() > 0) {
+                        newsTitle = es.get(i).select("h1 a").text();
+                        newsUrl = es.get(i).select("h1 a").attr("href");
+                    }
+                    newsDesc = "";
+
+                    //비디오 인경우
+                    if ( newsUrl.indexOf("http") == -1 ) {
+                        continue;
+                    }
+
+                    DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
+                }
+
+                es = doc.select("article.headlines ul.headlines-ul li.headlines-li");
+                for (int i = 0; i < es.size(); i++) {
+                    if (es.get(i).select("h1 a").size() > 0) {
+                        newsTitle = es.get(i).select("h1 a").text();
+                        newsUrl = es.get(i).select("h1 a").attr("href");
+                    }
+                    newsDesc = "";
+
+                    DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
+                }
+
+                es = doc.select("article.ab-col div.tag-content ul li.headlines-li");
+                for (int i = 0; i < es.size(); i++) {
+                    if (es.get(i).select("h1 a").size() > 0) {
+                        newsTitle = es.get(i).select("h1 a").text();
+                        newsUrl = es.get(i).select("h1 a").attr("href");
+                    }
+                    if (es.get(i).select("h1 div.desc").size() > 0) {
+                        newsDesc = es.get(i).select("h1 div.desc").text();
+                    }
+
+                    //비디오 인경우
+                    if ( newsUrl.indexOf("http") == -1 ) {
+                        continue;
+                    }
+
+                    DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
                 }
             }
         } catch ( Exception e ) {
@@ -1495,6 +1534,16 @@ public class DicUtils {
                     //DicUtils.dicLog(doc.html());
 
                     Elements es = doc.select("div.ArticleBody_body_2ECha p");
+                    for (int i = 0; i < es.size(); i++) {
+                        contents += es.get(i).text() + "\n\n";
+                    }
+
+                    DicDb.updNewsContents(db, seq, removeHtmlTagFromContents(contents));
+                } else if ( newsCode.equals(CommConstants.news_abcNews)) {
+                    Document doc = getDocument(url);
+                    //DicUtils.dicLog(doc.html());
+
+                    Elements es = doc.select("div.article-body div.article-copy p");
                     for (int i = 0; i < es.size(); i++) {
                         contents += es.get(i).text() + "\n\n";
                     }

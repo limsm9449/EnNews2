@@ -410,9 +410,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 bundle.putString("URL", cur.getString(cur.getColumnIndexOrThrow("URL")));
                 bundle.putString("CONTENTS", contents);
 
-                Intent helpIntent = new Intent(getApplication(), NewsViewActivity.class);
-                helpIntent.putExtras(bundle);
-                startActivity(helpIntent);
+                if ( "".equals(contents) ) {
+                    Toast.makeText(getApplicationContext(), "검색된 뉴스 기사가 없습니다.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent helpIntent = new Intent(getApplication(), NewsViewActivity.class);
+                    helpIntent.putExtras(bundle);
+                    startActivity(helpIntent);
+                }
             } else if ( taskKind.equals("NEWS_CONTENTS_LONG") ) {
                 Cursor cur = (Cursor) adapter.getItem(sSeq);
 

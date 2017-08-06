@@ -642,6 +642,7 @@ public class DicDb {
             db.execSQL(sql.toString());
         }
 
+        DicUtils.dicLog(title);
         return ( cnt > 0 ? true : false );
     }
 
