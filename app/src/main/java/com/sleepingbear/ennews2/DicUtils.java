@@ -911,7 +911,7 @@ public class DicUtils {
     }
 
     public static String[] getNews(String kind) {
-        String[] news = new String[7];
+        String[] news = new String[9];
         int idx = 0;
 
         if ( "N".equals(kind) ) {
@@ -922,6 +922,8 @@ public class DicUtils {
             news[idx++] = "Reuters";
             news[idx++] = "ABC News";
             news[idx++] = "BBC News";
+            news[idx++] = "CNN";
+            news[idx++] = "LosAngeles Times";
         } else if ( "C".equals(kind) ) {
             news[idx++] = CommConstants.news_KoreaJoongangDaily;
             news[idx++] = CommConstants.news_TheKoreaHerald;
@@ -930,6 +932,8 @@ public class DicUtils {
             news[idx++] = CommConstants.news_reuters;
             news[idx++] = CommConstants.news_abcNews;
             news[idx++] = CommConstants.news_bbcNews;
+            news[idx++] = CommConstants.news_cnn;
+            news[idx++] = CommConstants.news_losangeles;
         } else if ( "U".equals(kind) ) {
             news[idx++] = "http://koreajoongangdaily.joins.com";
             news[idx++] = "http://www.koreaherald.com";
@@ -938,6 +942,8 @@ public class DicUtils {
             news[idx++] = "http://www.reuters.com/";
             news[idx++] = "http://abcnews.go.com/";
             news[idx++] = "http://www.bbc.com/";
+            news[idx++] = "http://edition.cnn.com/";
+            news[idx++] = "http://www.latimes.com/";
         } else if ( "W".equals(kind) ) {
             news[idx++] = "E002";
             news[idx++] = "E003";
@@ -946,6 +952,8 @@ public class DicUtils {
             news[idx++] = "E010";
             news[idx++] = "E005";
             news[idx++] = "E006";
+            news[idx++] = "E007";
+            news[idx++] = "E008";
         }
 
         return news;
@@ -1233,6 +1241,66 @@ public class DicUtils {
             al.add(idx++, getNewsInfo("Entertainment & Arts",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml"));
             al.add(idx++, getNewsInfo("Health",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/health/rss.xml"));
             al.add(idx++, getNewsInfo("Politics",CommConstants.news_bbcNews + "_" + cIdx++,"http://feeds.bbci.co.uk/news/politics/rss.xml"));
+        } else if ( newsCode.equals(CommConstants.news_cnn)) {
+            int cIdx = 1;
+
+            al.add(idx++, getNewsInfo("World Home",CommConstants.news_cnn + "_" + cIdx++,"http://feeds.bbci.co.uk/news/world/rss.xml"));
+        } else if ( newsCode.equals(CommConstants.news_losangeles)) {
+            int cIdx = 1;
+
+            al.add(idx++, getNewsInfo("California & Local",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/local/"));
+            al.add(idx++, getNewsInfo("L.A. Now",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/local/lanow/"));
+            al.add(idx++, getNewsInfo("California",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/local/california/"));
+            al.add(idx++, getNewsInfo("Orange County",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/local/orangecounty/"));
+            al.add(idx++, getNewsInfo("Education",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/local/education/la-essential-education-updates-southern-california-2017-htmlstory.html"));
+            al.add(idx++, getNewsInfo("Crime",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/local/crime/"));
+
+            al.add(idx++, getNewsInfo("Arts & Culture",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/entertainment/arts/"));
+            al.add(idx++, getNewsInfo("Company Town",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/entertainment/envelope/cotown/"));
+            al.add(idx++, getNewsInfo("Gossip",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/entertainment/gossip/"));
+            al.add(idx++, getNewsInfo("Hero Complex",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/entertainment/herocomplex/"));
+            al.add(idx++, getNewsInfo("Movies",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/entertainment/movies/"));
+            al.add(idx++, getNewsInfo("Music",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/entertainment/music/"));
+            al.add(idx++, getNewsInfo("Television",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/entertainment/tv/"));
+            al.add(idx++, getNewsInfo("The Envelope",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/entertainment/envelope/"));
+
+            al.add(idx++, getNewsInfo("Sports - Sports Now",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/sports/sportsnow/"));
+            al.add(idx++, getNewsInfo("Sports - Dodgers",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/sports/dodgers/"));
+            al.add(idx++, getNewsInfo("Sports - Angels",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/sports/angels/"));
+            al.add(idx++, getNewsInfo("Sports - Lakers",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/sports/lakers/"));
+            al.add(idx++, getNewsInfo("Sports - Clippers",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/sports/clippers/"));
+            al.add(idx++, getNewsInfo("Sports - Rams",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/sports/rams/"));
+            al.add(idx++, getNewsInfo("Sports - Chargers",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/sports/chargers/"));
+            al.add(idx++, getNewsInfo("Sports - UCLA",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/sports/ucla/"));
+            al.add(idx++, getNewsInfo("Sports - USC",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/sports/usc/"));
+            al.add(idx++, getNewsInfo("Sports - High School",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/sports/highschool/"));
+            al.add(idx++, getNewsInfo("Sports - Kings/Ducks",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/sports/hockey/"));
+            al.add(idx++, getNewsInfo("Sports - NHL / Ducks",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/sports/ducks/"));
+
+            al.add(idx++, getNewsInfo("Business",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/entertainment/envelope/cotown/"));
+
+            al.add(idx++, getNewsInfo("Technology",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/business/technology/"));
+            al.add(idx++, getNewsInfo("State Politics",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/politics/"));
+            al.add(idx++, getNewsInfo("L.A. City Hall",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/local/cityhall/"));
+
+            al.add(idx++, getNewsInfo("Africa",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/world/africa/"));
+            al.add(idx++, getNewsInfo("Americas",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/world/mexico-americas/"));
+            al.add(idx++, getNewsInfo("Asia",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/world/asia/"));
+            al.add(idx++, getNewsInfo("Europe",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/world/europe/"));
+            al.add(idx++, getNewsInfo("Middle East",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/world/middleeast/"));
+            al.add(idx++, getNewsInfo("Development",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/world/global-development/"));
+
+            al.add(idx++, getNewsInfo("Opinion L.A.",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/opinion/opinion-la/#nt=secondarynavbar"));
+            al.add(idx++, getNewsInfo("David Horsey",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/opinion/topoftheticket/#nt=secondarynavbar"));
+            al.add(idx++, getNewsInfo("Editorials",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/opinion/editorials/#nt=secondarynavbar"));
+            al.add(idx++, getNewsInfo("Opinion",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/opinion/#nt=secondarynavbar"));
+            al.add(idx++, getNewsInfo("Op-Ed",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/opinion/op-ed/#nt=secondarynavbar"));
+            al.add(idx++, getNewsInfo("Readers React",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/opinion/readersreact/#nt=secondarynavbar"));
+            al.add(idx++, getNewsInfo("Readers Rep",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/local/readers-rep/#nt=secondarynavbar"));
+
+            al.add(idx++, getNewsInfo("Nation Environment",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/nation/la-na-energy-environment-sg-storygallery.html"));
+            al.add(idx++, getNewsInfo("Nation Development",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/world/global-development/"));
+            al.add(idx++, getNewsInfo("Nation Immigration",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/nation/immigration/"));
         }
 
         category = new String[al.size()];
@@ -1586,6 +1654,52 @@ public class DicUtils {
                 } catch(Exception e) {
                     dicLog(e.toString());
                 }
+            } else if ( newsCode.equals(CommConstants.news_cnn)) {
+            } else if ( newsCode.equals(CommConstants.news_losangeles)) {
+                Document doc = getDocument(url);
+                String newsTitle = "";
+                String newsUrl = "";
+                String newsDesc = "";
+
+                // Top 영역
+                Elements es = doc.select("section.trb_outfit_primaryItem article");
+                for (int i = 0; i < es.size(); i++) {
+                    if (es.get(i).select("h2 a").size() > 0) {
+                        newsTitle = es.get(i).select("h2 a").text();
+                        newsUrl = "http://www.latimes.com" + es.get(i).select("h2 a").attr("href");
+                    }
+                    if (es.get(i).select("p.trb_outfit_primaryItem_article_content").size() > 0) {
+                        newsDesc = es.get(i).select("p.trb_outfit_primaryItem_article_content").text();
+                    }
+                    DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
+                }
+
+                // 리스트 영역
+                es = doc.select("section.trb_outfit_group ul li");
+                for (int i = 0; i < es.size(); i++) {
+                    if (es.get(i).select("h3 a").size() > 0) {
+                        newsTitle = es.get(i).select("h3 a").text();
+                        newsUrl = "http://www.latimes.com" + es.get(i).select("h3 a").attr("href");
+                    }
+                    if (es.get(i).select("p.trb_outfit_group_list_item_brief").size() > 0) {
+                        newsDesc = es.get(i).select("p.trb_outfit_group_list_item_brief").text();
+                    }
+
+                    DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
+                }
+
+                es = doc.select("div.trb_blogroll_post");
+                for (int i = 0; i < es.size(); i++) {
+                    if (es.get(i).select("div.trb_blogroll_post_title a").size() > 0) {
+                        newsTitle = es.get(i).select("div.trb_blogroll_post_title a").text();
+                        newsUrl = "http://www.latimes.com" + es.get(i).select("div.trb_blogroll_post_title a").attr("href");
+                    }
+                    if (es.get(i).select("div.trb_blogroll_post_description p").size() > 0) {
+                        newsDesc = es.get(i).select("div.trb_blogroll_post_description p").text();
+                    }
+
+                    DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
+                }
             }
         } catch ( Exception e ) {
             Log.d(CommConstants.tag, e.getMessage());
@@ -1661,6 +1775,16 @@ public class DicUtils {
                     //DicUtils.dicLog(doc.html());
 
                     Elements es = doc.select("div.story-body div.story-body__inner p");
+                    for (int i = 0; i < es.size(); i++) {
+                        contents += es.get(i).text() + "\n\n";
+                    }
+
+                    DicDb.updNewsContents(db, seq, removeHtmlTagFromContents(contents));
+                } else if ( newsCode.equals(CommConstants.news_losangeles)) {
+                    Document doc = getDocument(url);
+                    //DicUtils.dicLog(doc.html());
+
+                    Elements es = doc.select("div.trb_ar_page p");
                     for (int i = 0; i < es.size(); i++) {
                         contents += es.get(i).text() + "\n\n";
                     }
