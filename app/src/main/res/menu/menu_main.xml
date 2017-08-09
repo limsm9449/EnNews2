@@ -2,7 +2,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.sleepingbear.ehdictandvoc.MainActivity">
-    <item android:id="@+id/action_refresh" android:title="@string/action_refresh"
+    <item android:id="@+id/action_web" android:title="@string/action_web"
         android:orderInCategory="100" app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_home_white_24dp"/>
+    <item android:id="@+id/action_refresh" android:title="@string/action_refresh"
+        android:orderInCategory="200" app:showAsAction="ifRoom"
         android:icon="@drawable/ic_autorenew_white_24dp"/>
 </menu>

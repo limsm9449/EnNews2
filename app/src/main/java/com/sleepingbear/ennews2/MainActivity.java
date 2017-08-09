@@ -276,7 +276,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_refresh) {
+        if (id == R.id.action_web) {
+            String newCode = DicUtils.getNews("C")[sNews];
+
+            Bundle bundle = new Bundle();
+            bundle.putString("kind", DicUtils.getNews("W")[sNews]);
+            bundle.putString("url", DicUtils.getNewsCategory(newCode, "U")[sCategory]);
+
+            Intent helpIntent = new Intent(getApplication(), NewsHtmlViewActivity.class);
+            helpIntent.putExtras(bundle);
+            startActivity(helpIntent);
+        } else if (id == R.id.action_refresh) {
             taskKind = "NEWS_LIST";
             task = new NewsTask();
             task.execute();
@@ -513,5 +523,9 @@ class MainCursorAdapter extends CursorAdapter {
         //사이즈 설정
         ((TextView) view.findViewById(R.id.my_tv_title)).setTextSize(fontSize);
         ((TextView) view.findViewById(R.id.my_tv_desc)).setTextSize(fontSize);
+
+        if ( "".equals(DicUtils.getString(cursor.getString(cursor.getColumnIndexOrThrow("DESC")))) ) {
+            ((TextView) view.findViewById(R.id.my_tv_desc)).setVisibility(View.GONE);
+        }
     }
 }

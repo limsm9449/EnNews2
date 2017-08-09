@@ -911,7 +911,7 @@ public class DicUtils {
     }
 
     public static String[] getNews(String kind) {
-        String[] news = new String[9];
+        String[] news = new String[11];
         int idx = 0;
 
         if ( "N".equals(kind) ) {
@@ -919,41 +919,49 @@ public class DicUtils {
             news[idx++] = "The Korea Herald";
             news[idx++] = "The Korea Times";
             news[idx++] = "The Chosunilbo";
-            news[idx++] = "Reuters";
             news[idx++] = "ABC News";
             news[idx++] = "BBC News";
             news[idx++] = "CNN";
             news[idx++] = "LosAngeles Times";
+            news[idx++] = "Reuters";
+            news[idx++] = "The New Work Times";
+            news[idx++] = "Washingtone Post";
         } else if ( "C".equals(kind) ) {
             news[idx++] = CommConstants.news_KoreaJoongangDaily;
             news[idx++] = CommConstants.news_TheKoreaHerald;
             news[idx++] = CommConstants.news_TheKoreaTimes;
             news[idx++] = CommConstants.news_TheChosunilbo;
-            news[idx++] = CommConstants.news_reuters;
             news[idx++] = CommConstants.news_abcNews;
             news[idx++] = CommConstants.news_bbcNews;
             news[idx++] = CommConstants.news_cnn;
             news[idx++] = CommConstants.news_losangeles;
+            news[idx++] = CommConstants.news_reuters;
+            news[idx++] = CommConstants.news_newWorkTimes;
+            news[idx++] = CommConstants.news_washingtonePost;
         } else if ( "U".equals(kind) ) {
             news[idx++] = "http://koreajoongangdaily.joins.com";
             news[idx++] = "http://www.koreaherald.com";
             news[idx++] = "http://www.koreatimes.co.kr";
             news[idx++] = "http://english.chosun.com";
-            news[idx++] = "http://www.reuters.com/";
             news[idx++] = "http://abcnews.go.com/";
             news[idx++] = "http://www.bbc.com/";
             news[idx++] = "http://edition.cnn.com/";
             news[idx++] = "http://www.latimes.com/";
+            news[idx++] = "http://www.reuters.com/";
+            news[idx++] = "http://mobile.nytimes.com";
+            news[idx++] = "https://www.washingtonpost.com";
         } else if ( "W".equals(kind) ) {
             news[idx++] = "E002";
             news[idx++] = "E003";
             news[idx++] = "E004";
             news[idx++] = "E001";
-            news[idx++] = "E010";
             news[idx++] = "E005";
             news[idx++] = "E006";
             news[idx++] = "E007";
             news[idx++] = "E008";
+            news[idx++] = "E010";
+            news[idx++] = "E009";
+            news[idx++] = "E011";
         }
 
         return news;
@@ -1244,73 +1252,53 @@ public class DicUtils {
         } else if ( newsCode.equals(CommConstants.news_cnn)) {
             int cIdx = 1;
 
-            al.add(idx++, getNewsInfo("Regions - U.S.",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/us"));
-            al.add(idx++, getNewsInfo("Regions - Africa",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/africa"));
-            al.add(idx++, getNewsInfo("Regions - Americas",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/americas"));
-            al.add(idx++, getNewsInfo("Regions - Asia",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/asia"));
-            al.add(idx++, getNewsInfo("Regions - China",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/china"));
-            al.add(idx++, getNewsInfo("Regions - Europe",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/europe"));
-            al.add(idx++, getNewsInfo("Regions - Middle East",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/middle-east"));
-            al.add(idx++, getNewsInfo("Regions - Opinion",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/opinions"));
+            al.add(idx++, getNewsInfo("Regions - U.S.",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/us"));
+            al.add(idx++, getNewsInfo("Regions - Africa",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/africa"));
+            al.add(idx++, getNewsInfo("Regions - Americas",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/americas"));
+            al.add(idx++, getNewsInfo("Regions - Asia",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/asia"));
+            al.add(idx++, getNewsInfo("Regions - China",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/china"));
+            al.add(idx++, getNewsInfo("Regions - Europe",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/europe"));
+            al.add(idx++, getNewsInfo("Regions - Middle East",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/middle-east"));
+            al.add(idx++, getNewsInfo("Regions - Opinion",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/opinions"));
 
-            al.add(idx++, getNewsInfo("U.S. Politics - 45",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/specials/politics/president-donald-trump-45"));
-            al.add(idx++, getNewsInfo("U.S. Politics - Congress",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/specials/politics/congress-capitol-hill"));
-            al.add(idx++, getNewsInfo("U.S. Politics - Security",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/specials/politics/us-security"));
-            al.add(idx++, getNewsInfo("U.S. Politics - The Nine",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/specials/politics/supreme-court-nine"));
-            al.add(idx++, getNewsInfo("U.S. Politics - Trumpmerica",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/specials/politics/trumpmerica"));
-            al.add(idx++, getNewsInfo("U.S. Politics - State",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/specials/politics/state-cnn-politics-magazine"));
+            al.add(idx++, getNewsInfo("U.S. Politics - 45",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/specials/politics/president-donald-trump-45"));
+            al.add(idx++, getNewsInfo("U.S. Politics - Congress",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/specials/politics/congress-capitol-hill"));
+            al.add(idx++, getNewsInfo("U.S. Politics - Security",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/specials/politics/us-security"));
+            al.add(idx++, getNewsInfo("U.S. Politics - The Nine",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/specials/politics/supreme-court-nine"));
+            al.add(idx++, getNewsInfo("U.S. Politics - Trumpmerica",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/specials/politics/trumpmerica"));
+            al.add(idx++, getNewsInfo("U.S. Politics - State",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/specials/politics/state-cnn-politics-magazine"));
 
-            al.add(idx++, getNewsInfo("Money - Business",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com//money.cnn.com/news/"));
-            al.add(idx++, getNewsInfo("Money - Markets",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com//money.cnn.com/data/markets/"));
-            al.add(idx++, getNewsInfo("Money - Tech",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com//money.cnn.com/technology/"));
-            al.add(idx++, getNewsInfo("Money - Luxury",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com//money.cnn.com/luxury/"));
+            al.add(idx++, getNewsInfo("Entertainment - Stars",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/entertainment/celebrities"));
+            al.add(idx++, getNewsInfo("Entertainment - Screen",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/entertainment/movies"));
+            al.add(idx++, getNewsInfo("Entertainment - Binge",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/entertainment/tv-shows"));
+            al.add(idx++, getNewsInfo("Entertainment - Culture",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/entertainment/culture"));
 
-            al.add(idx++, getNewsInfo("Entertainment - Stars",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/entertainment/celebrities"));
-            al.add(idx++, getNewsInfo("Entertainment - Screen",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/entertainment/movies"));
-            al.add(idx++, getNewsInfo("Entertainment - Binge",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/entertainment/tv-shows"));
-            al.add(idx++, getNewsInfo("Entertainment - Culture",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/entertainment/culture"));
-            al.add(idx++, getNewsInfo("Entertainment - Media",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com//money.cnn.com/media"));
+            al.add(idx++, getNewsInfo("Sport - Football",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/sport/football"));
+            al.add(idx++, getNewsInfo("Sport - Golf",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/sport/golf"));
+            al.add(idx++, getNewsInfo("Sport - Tennis",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/sport/tennis"));
+            al.add(idx++, getNewsInfo("Sport - Motorsport",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/sport/motorsport"));
+            al.add(idx++, getNewsInfo("Sport - Horseracing",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/sport/horse-racing"));
+            al.add(idx++, getNewsInfo("Sport - Equestrian",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/sport/equestrian"));
+            al.add(idx++, getNewsInfo("Sport - Sailing",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/sport/sailing"));
+            al.add(idx++, getNewsInfo("Sport - Skiing",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/sport/skiing"));
 
-            al.add(idx++, getNewsInfo("Technology - Business",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com//money.cnn.com/technology/business/"));
-            al.add(idx++, getNewsInfo("Technology - Culture",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com//money.cnn.com/technology/culture/"));
-            al.add(idx++, getNewsInfo("Technology - Gadgets",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com//money.cnn.com/technology/gadgets/"));
-            al.add(idx++, getNewsInfo("Technology - Future",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com//money.cnn.com/technology/future/"));
-            al.add(idx++, getNewsInfo("Technology - Startups",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com//money.cnn.com/technology/startups/"));
+            al.add(idx++, getNewsInfo("Style - Fashion",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/style/fashion"));
+            al.add(idx++, getNewsInfo("Style - Design",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/style/design"));
+            al.add(idx++, getNewsInfo("Style - Architecture",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/style/architecture"));
+            al.add(idx++, getNewsInfo("Style - Arts",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/style/arts"));
+            al.add(idx++, getNewsInfo("Style - Autos",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/style/autos"));
+            al.add(idx++, getNewsInfo("Style - Luxury",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/style/luxury"));
 
-            al.add(idx++, getNewsInfo("Sport - Football",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/sport/football"));
-            al.add(idx++, getNewsInfo("Sport - Golf",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/sport/golf"));
-            al.add(idx++, getNewsInfo("Sport - Tennis",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/sport/tennis"));
-            al.add(idx++, getNewsInfo("Sport - Motorsport",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/sport/motorsport"));
-            al.add(idx++, getNewsInfo("Sport - Horseracing",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/sport/horse-racing"));
-            al.add(idx++, getNewsInfo("Sport - Equestrian",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/sport/equestrian"));
-            al.add(idx++, getNewsInfo("Sport - Sailing",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/sport/sailing"));
-            al.add(idx++, getNewsInfo("Sport - Skiing",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/sport/skiing"));
+            al.add(idx++, getNewsInfo("Health - Diet + Fitness",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/specials/health/diet-fitness"));
+            al.add(idx++, getNewsInfo("Health - Living Well",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/specials/health/living-well"));
+            al.add(idx++, getNewsInfo("Health - Parenting + Family",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/specials/living/cnn-parents"));
+            al.add(idx++, getNewsInfo("Health - Vital Signs",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/specials/health/vital-signs"));
 
-            al.add(idx++, getNewsInfo("Travel - Wonder",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/travel/wonder"));
-            al.add(idx++, getNewsInfo("Travel - Food & Drink",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/travel/food-and-drink"));
-            al.add(idx++, getNewsInfo("Travel - Play",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/travel/play"));
-            al.add(idx++, getNewsInfo("Travel - Stay",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/travel/stay"));
-
-            al.add(idx++, getNewsInfo("Style - Fashion",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/style/fashion"));
-            al.add(idx++, getNewsInfo("Style - Design",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/style/design"));
-            al.add(idx++, getNewsInfo("Style - Architecture",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/style/architecture"));
-            al.add(idx++, getNewsInfo("Style - Arts",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/style/arts"));
-            al.add(idx++, getNewsInfo("Style - Autos",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/style/autos"));
-            al.add(idx++, getNewsInfo("Style - Luxury",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/style/luxury"));
-
-            al.add(idx++, getNewsInfo("Health - Diet + Fitness",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/specials/health/diet-fitness"));
-            al.add(idx++, getNewsInfo("Health - Living Well",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/specials/health/living-well"));
-            al.add(idx++, getNewsInfo("Health - Parenting + Family",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/specials/living/cnn-parents"));
-            al.add(idx++, getNewsInfo("Health - Vital Signs",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/specials/health/vital-signs"));
-
-            al.add(idx++, getNewsInfo("Features - Freedom Project",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/specials/world/freedom-project"));
-            al.add(idx++, getNewsInfo("Features - Impact Your World",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/specials/impact-your-world"));
-            al.add(idx++, getNewsInfo("Features - Inside Africa",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/specials/africa/inside-africa"));
-            al.add(idx++, getNewsInfo("Features - 2 degrees",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/specials/opinions/two-degrees"));
-            al.add(idx++, getNewsInfo("Features - CNN Heroes",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/specials/cnn-heroes"));
-            al.add(idx++, getNewsInfo("Features - All Features",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/specials"));
-            al.add(idx++, getNewsInfo("Features - CNN Heroes",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/specials/cnn-heroes"));
-            al.add(idx++, getNewsInfo("Features - All Features",CommConstants.news_losangeles + "_" + cIdx++,"http:/edition.cnn.com/specials"));
+            al.add(idx++, getNewsInfo("Features - Freedom Project",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/specials/world/freedom-project"));
+            al.add(idx++, getNewsInfo("Features - Impact Your World",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/specials/impact-your-world"));
+            al.add(idx++, getNewsInfo("Features - Inside Africa",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/specials/africa/inside-africa"));
+            al.add(idx++, getNewsInfo("Features - 2 degrees",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/specials/opinions/two-degrees"));
+            al.add(idx++, getNewsInfo("Features - CNN Heroes",CommConstants.news_losangeles + "_" + cIdx++,"http://edition.cnn.com/specials/cnn-heroes"));
         } else if ( newsCode.equals(CommConstants.news_losangeles)) {
             int cIdx = 1;
 
@@ -1390,6 +1378,165 @@ public class DicUtils {
 
             al.add(idx++, getNewsInfo("Autos",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/business/autos/"));
             al.add(idx++, getNewsInfo("Autos - Reviews",CommConstants.news_losangeles + "_" + cIdx++,"http://www.latimes.com/business/autos/reviews/"));
+        } else if ( newsCode.equals(CommConstants.news_newWorkTimes)) {
+            int cIdx = 1;
+
+            al.add(idx++, getNewsInfo("News - World",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/world/index.html"));
+            al.add(idx++, getNewsInfo("News - U.S.",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/national/index.html"));
+            al.add(idx++, getNewsInfo("News - Politics",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/politics/index.html"));
+            al.add(idx++, getNewsInfo("News - N.Y.",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/nyregion/index.html"));
+            al.add(idx++, getNewsInfo("News - Business",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/business/index.html"));
+            al.add(idx++, getNewsInfo("News - Tech",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/technology/index.html"));
+            al.add(idx++, getNewsInfo("News - Science",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/section/science"));
+            al.add(idx++, getNewsInfo("News - Health",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/health/index.html"));
+            al.add(idx++, getNewsInfo("News - Sports",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/sports/index.html"));
+            al.add(idx++, getNewsInfo("News - Education",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/education/index.html"));
+            al.add(idx++, getNewsInfo("News - Obituaries",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/obituaries/index.html"));
+            al.add(idx++, getNewsInfo("News - Today's Paper",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/todayspaper/index.html"));
+            al.add(idx++, getNewsInfo("News - Corrections",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/corrections/index.html"));
+
+            al.add(idx++, getNewsInfo("Today's Opinion",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/opinion/index.html?module=SiteIndex&region=Footer&pgtype=sectionfront"));
+
+            al.add(idx++, getNewsInfo("Arts - Today's Arts",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/arts/index.html"));
+            al.add(idx++, getNewsInfo("Arts - Art Design",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/arts/design/index.html"));
+            al.add(idx++, getNewsInfo("Arts - Books",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/books/index.html"));
+            al.add(idx++, getNewsInfo("Arts - Dance",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/arts/dance/index.html"));
+            al.add(idx++, getNewsInfo("Arts - Movies",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/movies/index.html"));
+            al.add(idx++, getNewsInfo("Arts - Music",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/arts/music/index.html"));
+            al.add(idx++, getNewsInfo("Arts - N.Y.C. Events Guide",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/events/"));
+            al.add(idx++, getNewsInfo("Arts - Television",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/arts/television/index.html"));
+            al.add(idx++, getNewsInfo("Arts - Theater",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/theater/index.html"));
+
+            al.add(idx++, getNewsInfo("Living - Automobiles",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/automobiles/index.html"));
+            al.add(idx++, getNewsInfo("Living - Crossword",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/crosswords/"));
+            al.add(idx++, getNewsInfo("Living - Food",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/dining/index.html"));
+            al.add(idx++, getNewsInfo("Living - Education",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/education/index.html"));
+            al.add(idx++, getNewsInfo("Living - Fashion  Style",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/fashion/index.html"));
+            al.add(idx++, getNewsInfo("Living - Health",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/health/index.html"));
+            al.add(idx++, getNewsInfo("Living - Jobs",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/section/jobs"));
+            al.add(idx++, getNewsInfo("Living - Magazine",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/magazine/index.html"));
+            al.add(idx++, getNewsInfo("Living - N.Y.C. Events Guide",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/events/"));
+            al.add(idx++, getNewsInfo("Living - Real Estate",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/section/realestate"));
+            al.add(idx++, getNewsInfo("Living - T Magazine",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/section/t-magazine"));
+            al.add(idx++, getNewsInfo("Living - Travel",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/section/travel"));
+            al.add(idx++, getNewsInfo("Living - Weddings  Celebrations",CommConstants.news_newWorkTimes + "_" + cIdx++,"https://www.nytimes.com/pages/fashion/weddings/index.html"));
+        } else if ( newsCode.equals(CommConstants.news_washingtonePost)) {
+            int cIdx = 1;
+
+            al.add(idx++, getNewsInfo("Politics - PowerPost ",CommConstants.news_washingtonePost + "_" + cIdx++,"https://www.washingtonpost.com/news/powerpost/"));
+            al.add(idx++, getNewsInfo("Politics - The Fix ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/blogs/the-fix/"));
+            al.add(idx++, getNewsInfo("Politics - White House ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/politics/white-house/"));
+            al.add(idx++, getNewsInfo("Politics - Courts and Law ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/politics/courts-law/"));
+            al.add(idx++, getNewsInfo("Politics - Polling ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/politics/polling/"));
+            al.add(idx++, getNewsInfo("Politics - Monkey Cage ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/blogs/monkey-cage/"));
+            al.add(idx++, getNewsInfo("Politics - Fact Checker ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/blogs/fact-checker/"));
+            al.add(idx++, getNewsInfo("Politics - Post Politics Blog ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/blogs/post-politics/"));
+
+            al.add(idx++, getNewsInfo("Opinions - The Post's View ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/opinions/the-posts-view/"));
+            al.add(idx++, getNewsInfo("Opinions - Toles Cartoons ",CommConstants.news_washingtonePost + "_" + cIdx++,"https://www.washingtonpost.com/people/tom-toles"));
+            al.add(idx++, getNewsInfo("Opinions - Telnaes Animations ",CommConstants.news_washingtonePost + "_" + cIdx++,"https://www.washingtonpost.com/people/ann-telnaes"));
+            al.add(idx++, getNewsInfo("Opinions - Local Opinions ",CommConstants.news_washingtonePost + "_" + cIdx++,"https://www.washingtonpost.com/opinions/local-opinions/"));
+            al.add(idx++, getNewsInfo("Opinions - Global Opinions ",CommConstants.news_washingtonePost + "_" + cIdx++,"https://www.washingtonpost.com/global-opinions/"));
+            al.add(idx++, getNewsInfo("Opinions - Letters to the Editor ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/opinions/letters-to-the-editor/"));
+            al.add(idx++, getNewsInfo("Opinions - Act Four ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/news/act-four/"));
+            al.add(idx++, getNewsInfo("Opinions - All Opinions Are Local ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/blogs/all-opinions-are-local/"));
+            al.add(idx++, getNewsInfo("Opinions - Book Party ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/news/book-party/"));
+            al.add(idx++, getNewsInfo("Opinions - Compost ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/blogs/compost/"));
+            al.add(idx++, getNewsInfo("Opinions - Erik Wemple ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/blogs/erik-wemple/"));
+            al.add(idx++, getNewsInfo("Opinions - In Theory ",CommConstants.news_washingtonePost + "_" + cIdx++,"https://www.washingtonpost.com/news/in-theory/"));
+            al.add(idx++, getNewsInfo("Opinions - The Plum Line ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/blogs/plum-line/"));
+            al.add(idx++, getNewsInfo("Opinions - PostPartisan ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/blogs/post-partisan/"));
+            al.add(idx++, getNewsInfo("Opinions - Rampage ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/news/rampage/"));
+            al.add(idx++, getNewsInfo("Opinions - Right Turn ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/blogs/right-turn/"));
+            al.add(idx++, getNewsInfo("Opinions - The Watch ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/news/the-watch/"));
+            al.add(idx++, getNewsInfo("Opinions - Volokh Conspiracy ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/news/volokh-conspiracy/"));
+            al.add(idx++, getNewsInfo("Opinions - DemocracyPost",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/news/democracy-post/"));
+
+            al.add(idx++, getNewsInfo("Sports - Redskins ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/sports/redskins/"));
+            al.add(idx++, getNewsInfo("Sports - NFL ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/sports/nfl/"));
+            al.add(idx++, getNewsInfo("Sports - MLB ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/sports/mlb/"));
+            al.add(idx++, getNewsInfo("Sports - NBA ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/sports/nba/"));
+            al.add(idx++, getNewsInfo("Sports - NHL ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/sports/nhl/"));
+            al.add(idx++, getNewsInfo("Sports - AllMetSports ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/allmetsports/"));
+            al.add(idx++, getNewsInfo("Sports - Soccer ",CommConstants.news_washingtonePost + "_" + cIdx++,"https://www.washingtonpost.com/sports/soccer/"));
+            al.add(idx++, getNewsInfo("Sports - Boxing/MMA ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/sports/boxing-mma/"));
+            al.add(idx++, getNewsInfo("Sports - College Sports ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/sports/colleges/"));
+            al.add(idx++, getNewsInfo("Sports - College Football ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/sports/colleges/football/"));
+            al.add(idx++, getNewsInfo("Sports - College Basketball ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/sports/colleges/basketball/"));
+            al.add(idx++, getNewsInfo("Sports - D.C. Sports Bog ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/blogs/dc-sports-bog/"));
+            al.add(idx++, getNewsInfo("Sports - Early Lead ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/blogs/early-lead/"));
+            al.add(idx++, getNewsInfo("Sports - Fancy Stats ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/news/fancy-stats/"));
+            al.add(idx++, getNewsInfo("Sports - Golf ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/sports/golf/"));
+            al.add(idx++, getNewsInfo("Sports - Tennis ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/sports/tennis/"));
+            al.add(idx++, getNewsInfo("Sports - Fantasy Sports",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/sports/fantasy-sports/"));
+
+            al.add(idx++, getNewsInfo("Local - D.C. ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/local/dc/"));
+            al.add(idx++, getNewsInfo("Local - Maryland ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/local/maryland/"));
+            al.add(idx++, getNewsInfo("Local - Virginia ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/local/virginia/"));
+            al.add(idx++, getNewsInfo("Local - Public Safety ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/local/public-safety/"));
+            al.add(idx++, getNewsInfo("Local - Education ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/local/education/"));
+            al.add(idx++, getNewsInfo("Local - Obituaries ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/local/obituaries/"));
+            al.add(idx++, getNewsInfo("Local - Transportation ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/local/traffic-commuting/"));
+            al.add(idx++, getNewsInfo("Local - Weather ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/local/weather/"));
+            al.add(idx++, getNewsInfo("Local - Retropolis",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/news/retropolis/"));
+
+            al.add(idx++, getNewsInfo("National - Acts of Faith ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/news/acts-of-faith/"));
+            al.add(idx++, getNewsInfo("National - Health and Science ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/national/health-science/"));
+            al.add(idx++, getNewsInfo("National - National Security ",CommConstants.news_washingtonePost + "_" + cIdx++,"https://www.washingtonpost.com/world/national-security/"));
+            al.add(idx++, getNewsInfo("National - Investigations ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/national/investigations/"));
+            al.add(idx++, getNewsInfo("National - Morning Mix ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/news/morning-mix/"));
+            al.add(idx++, getNewsInfo("National - Post Nation ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/news/post-nation/"));
+            al.add(idx++, getNewsInfo("National - True Crime ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/news/true-crime/"));
+            al.add(idx++, getNewsInfo("National - Obituaries",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/local/obituaries/"));
+
+            al.add(idx++, getNewsInfo("World - Africa ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/world/africa/"));
+            al.add(idx++, getNewsInfo("World - The Americas ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/world/americas/"));
+            al.add(idx++, getNewsInfo("World - Asia and Pacific ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/world/asia-pacific/"));
+            al.add(idx++, getNewsInfo("World - Europe ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/world/europe/"));
+            al.add(idx++, getNewsInfo("World - Middle East ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/world/middle-east/"));
+            al.add(idx++, getNewsInfo("World - National Security ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/world/national-security/"));
+            al.add(idx++, getNewsInfo("World - WorldViews ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/blogs/worldviews/"));
+            al.add(idx++, getNewsInfo("World - Checkpoint",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/news/checkpoint/"));
+
+            al.add(idx++, getNewsInfo("Business - Wonkblog ",CommConstants.news_washingtonePost + "_" + cIdx++,"https://www.washingtonpost.com/news/wonk/"));
+            al.add(idx++, getNewsInfo("Business - On Leadership ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/business/on-leadership/"));
+            al.add(idx++, getNewsInfo("Business - Personal Finance ",CommConstants.news_washingtonePost + "_" + cIdx++,"https://www.washingtonpost.com/business/get-there/"));
+            al.add(idx++, getNewsInfo("Business - Digger ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/news/digger/"));
+            al.add(idx++, getNewsInfo("Business - Energy and Environment ",CommConstants.news_washingtonePost + "_" + cIdx++,"https://www.washingtonpost.com/news/energy-environment/"));
+            al.add(idx++, getNewsInfo("Business - On Small Business ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/business/on-small-business/"));
+            al.add(idx++, getNewsInfo("Business - Capital Business",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/business/capital-business/"));
+
+            al.add(idx++, getNewsInfo("Tech - Innovations ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/news/innovations/"));
+            al.add(idx++, getNewsInfo("Tech - The Switch ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/blogs/the-switch/"));
+
+            al.add(idx++, getNewsInfo("Lifestyle - Arts and Entertainment ",CommConstants.news_washingtonePost + "_" + cIdx++,"https://www.washingtonpost.com/news/arts-and-entertainment/"));
+            al.add(idx++, getNewsInfo("Lifestyle - Advice ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/lifestyle/advice/"));
+            al.add(idx++, getNewsInfo("Lifestyle - Carolyn Hax ",CommConstants.news_washingtonePost + "_" + cIdx++,"https://www.washingtonpost.com/pb/people/carolyn-hax/"));
+            al.add(idx++, getNewsInfo("Lifestyle - Food ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/food/"));
+            al.add(idx++, getNewsInfo("Lifestyle - Travel ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/lifestyle/travel/"));
+            al.add(idx++, getNewsInfo("Lifestyle - Wellness ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/lifestyle/wellness/"));
+            al.add(idx++, getNewsInfo("Lifestyle - Magazine ",CommConstants.news_washingtonePost + "_" + cIdx++,"https://www.washingtonpost.com/lifestyle/magazine/"));
+            al.add(idx++, getNewsInfo("Lifestyle - Home and Garden ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/lifestyle/home-garden/"));
+            al.add(idx++, getNewsInfo("Lifestyle - Inspired Life ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/news/inspired-life/"));
+            al.add(idx++, getNewsInfo("Lifestyle - Fashion ",CommConstants.news_washingtonePost + "_" + cIdx++,"https://www.washingtonpost.com/lifestyle/fashion/"));
+            al.add(idx++, getNewsInfo("Lifestyle - KidsPost ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/lifestyle/kidspost/"));
+            al.add(idx++, getNewsInfo("Lifestyle - On Parenting ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/lifestyle/on-parenting/"));
+            al.add(idx++, getNewsInfo("Lifestyle - Reliable Source ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/blogs/reliable-source/"));
+            al.add(idx++, getNewsInfo("Lifestyle - The Intersect ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/news/the-intersect/"));
+            al.add(idx++, getNewsInfo("Lifestyle - Solo-ish",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/news/soloish/"));
+
+            al.add(idx++, getNewsInfo("Entertainment - Books ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/entertainment/books/"));
+            al.add(idx++, getNewsInfo("Entertainment - Comics ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/entertainment/comics/"));
+            al.add(idx++, getNewsInfo("Entertainment - Comic Riffs ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/news/comic-riffs/"));
+            al.add(idx++, getNewsInfo("Entertainment - Going Out Guide ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/goingoutguide/"));
+            al.add(idx++, getNewsInfo("Entertainment - Horoscopes ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/entertainment/horoscopes/"));
+            al.add(idx++, getNewsInfo("Entertainment - Movies ",CommConstants.news_washingtonePost + "_" + cIdx++,"https://www.washingtonpost.com/goingoutguide/movies/"));
+            al.add(idx++, getNewsInfo("Entertainment - Museums ",CommConstants.news_washingtonePost + "_" + cIdx++,"https://www.washingtonpost.com/goingoutguide/museums/"));
+            al.add(idx++, getNewsInfo("Entertainment - Music ",CommConstants.news_washingtonePost + "_" + cIdx++,"https://www.washingtonpost.com/goingoutguide/music/"));
+            al.add(idx++, getNewsInfo("Entertainment - Theater and Dance ",CommConstants.news_washingtonePost + "_" + cIdx++,"https://www.washingtonpost.com/goingoutguide/theater-dance/"));
+            al.add(idx++, getNewsInfo("Entertainment - TV ",CommConstants.news_washingtonePost + "_" + cIdx++,"http://www.washingtonpost.com/entertainment/tv/"));
+            al.add(idx++, getNewsInfo("Entertainment - Restaurants ",CommConstants.news_washingtonePost + "_" + cIdx++,"https://www.washingtonpost.com/goingoutguide/restaurants/"));
+            al.add(idx++, getNewsInfo("Entertainment - Bars  Clubs",CommConstants.news_washingtonePost + "_" + cIdx++,"https://www.washingtonpost.com/goingoutguide/bars-clubs/"));
         }
 
         category = new String[al.size()];
@@ -1753,7 +1900,7 @@ public class DicUtils {
                 for (int i = 0; i < es.size(); i++) {
                     if (es.get(i).select("h3 a").size() > 0) {
                         newsTitle = es.get(i).select("h3 a").text();
-                        newsUrl = es.get(i).select("h3 a").attr("href");
+                        newsUrl = "http://edition.cnn.com" + es.get(i).select("h3 a").attr("href");
                     }
                     newsDesc = "";
 
@@ -1805,6 +1952,70 @@ public class DicUtils {
                     }
                     if (es.get(i).select("div.trb_blogroll_post_description p").size() > 0) {
                         newsDesc = es.get(i).select("div.trb_blogroll_post_description p").text();
+                    }
+
+                    DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
+                }
+            } else if ( newsCode.equals(CommConstants.news_newWorkTimes)) {
+                Document doc = getDocument(url);
+                String newsTitle = "";
+                String newsUrl = "";
+                String newsDesc = "";
+
+                Elements es = doc.select("article.story");
+                for (int i = 0; i < es.size(); i++) {
+                    if (es.get(i).select("h2 a").size() > 0) {
+                        newsTitle = es.get(i).select("h2 a").text();
+                        newsUrl = es.get(i).select("h2 a").attr("href");
+                    }
+                    if (es.get(i).select("p.summary").size() > 0) {
+                        newsDesc = es.get(i).select("p.summary").text();
+                    }
+
+                    DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
+                }
+
+                es = doc.select("div.story-body");
+                for (int i = 0; i < es.size(); i++) {
+                    if (es.get(i).select("a").size() > 0) {
+                        newsUrl = es.get(i).select("a").attr("href");
+                    }
+                    if (es.get(i).select("h2.headline").size() > 0) {
+                        newsTitle = es.get(i).select("h2.headline").text();
+                    }
+                    if (es.get(i).select("p.summary").size() > 0) {
+                        newsDesc = es.get(i).select("p.summary").text();
+                    }
+
+                    DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
+                }
+
+                es = doc.select("div.story");
+                for (int i = 0; i < es.size(); i++) {
+                    if (es.get(i).select("h3 a").size() > 0) {
+                        newsTitle = es.get(i).select("h3 a").text();
+                        newsUrl = es.get(i).select("h3 a").attr("href");
+                    }
+                    if (es.get(i).select("p.summary").size() > 0) {
+                        newsDesc = es.get(i).select("p.summary").text();
+                    }
+
+                    DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
+                }
+            } else if ( newsCode.equals(CommConstants.news_washingtonePost)) {
+                Document doc = getDocument(url);
+                String newsTitle = "";
+                String newsUrl = "";
+                String newsDesc = "";
+
+                Elements es = doc.select("div.story-list-story");
+                for (int i = 0; i < es.size(); i++) {
+                    if (es.get(i).select("div.story-headline h3 a").size() > 0) {
+                        newsTitle = es.get(i).select("div.story-headline h3 a").text();
+                        newsUrl = es.get(i).select("div.story-headline h3 a").attr("href");
+                    }
+                    if (es.get(i).select("div.story-description p").size() > 0) {
+                        newsDesc = es.get(i).select("div.story-description p").text();
                     }
 
                     DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
@@ -1889,11 +2100,45 @@ public class DicUtils {
                     }
 
                     DicDb.updNewsContents(db, seq, removeHtmlTagFromContents(contents));
+                } else if ( newsCode.equals(CommConstants.news_cnn)) {
+                    Document doc = getDocument(url);
+                    //DicUtils.dicLog(doc.html());
+
+                    Elements es = doc.select("div.l-container div p.zn-body__paragraph");
+                    for (int i = 0; i < es.size(); i++) {
+                        contents += es.get(i).text() + "\n\n";
+                    }
+                    es = doc.select("div.l-container div.zn-body__paragraph");
+                    for (int i = 0; i < es.size(); i++) {
+                        contents += es.get(i).text() + "\n\n";
+                    }
+
+                    DicDb.updNewsContents(db, seq, removeHtmlTagFromContents(contents));
                 } else if ( newsCode.equals(CommConstants.news_losangeles)) {
                     Document doc = getDocument(url);
                     //DicUtils.dicLog(doc.html());
 
                     Elements es = doc.select("div.trb_ar_page p");
+                    for (int i = 0; i < es.size(); i++) {
+                        contents += es.get(i).text() + "\n\n";
+                    }
+
+                    DicDb.updNewsContents(db, seq, removeHtmlTagFromContents(contents));
+                } else if ( newsCode.equals(CommConstants.news_newWorkTimes)) {
+                    Document doc = getDocument(url);
+                    //DicUtils.dicLog(doc.html());
+
+                    Elements es = doc.select("div.story-body p");
+                    for (int i = 0; i < es.size(); i++) {
+                        contents += es.get(i).text() + "\n\n";
+                    }
+
+                    DicDb.updNewsContents(db, seq, removeHtmlTagFromContents(contents));
+                } else if ( newsCode.equals(CommConstants.news_washingtonePost)) {
+                    Document doc = getDocument(url);
+                    //DicUtils.dicLog(doc.html());
+
+                    Elements es = doc.select("div#article-body article p");
                     for (int i = 0; i < es.size(); i++) {
                         contents += es.get(i).text() + "\n\n";
                     }
@@ -1962,15 +2207,12 @@ public class DicUtils {
         String date = prefs.getString(pref, "");
         dicLog(pref + " : " + date);
 
-        return false;
-        /*
         if ( date.equals(getCurrentDate()) ) {
             return true;
         } else {
             setPreferences(mContext, pref, getCurrentDate());
             return false;
         }
-        */
     }
 
     public static void initNewsPreferences(Context mContext) {
