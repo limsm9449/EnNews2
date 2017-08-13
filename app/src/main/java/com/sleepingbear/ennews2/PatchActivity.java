@@ -29,6 +29,7 @@ public class PatchActivity extends AppCompatActivity {
 
         StringBuffer patch = new StringBuffer();
         patch.append("* 패치 내역" + CommConstants.sqlCR);
+        patch.append("- 해외 8개 영어뉴스 추가" + CommConstants.sqlCR);
         patch.append("- 2017.07.20 : 최고의 영어신문 2 개발" + CommConstants.sqlCR);
 
         ((TextView) this.findViewById(R.id.my_c_patch_tv1)).setText(patch.toString());

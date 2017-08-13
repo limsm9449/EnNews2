@@ -219,8 +219,8 @@ public class DicUtils {
                     DicDb.insDicVoc(db, row[1], row[2], row[3], row[4]);
                 } else if ( row[0].equals(CommConstants.tag_click_word_ins) ) {
                     DicDb.insDicClickWord(db, row[1], row[2]);
-                } else if ( row[0].equals(CommConstants.tag_news_ins) ) {
-                    DicDb.insNewsBackup(db, row[1], row[2], row[3], row[4], row[5], row[6]);
+                //} else if ( row[0].equals(CommConstants.tag_news_ins) ) {
+                    //DicDb.insNewsBackup(db, row[1], row[2], row[3], row[4], row[5], row[6]);
                 }
 
                 readString = buffreader.readLine();

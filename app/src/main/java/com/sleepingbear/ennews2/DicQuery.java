@@ -23,10 +23,6 @@ public class DicQuery {
         sql.append(" WHERE A.ENTRY_ID = B.ENTRY_ID" + CommConstants.sqlCR);
 
         sql.append("UNION" + CommConstants.sqlCR);
-        sql.append("SELECT '" + CommConstants.tag_news_ins + "'||'^'||NEWS||'^'||CATEGORY||'^'||TITLE||'^'||DESC||'^'||URL||'^'||INS_DATE WRITE_DATA " + CommConstants.sqlCR);
-        sql.append(" FROM DIC_NEWS" + CommConstants.sqlCR);
-
-        sql.append("UNION" + CommConstants.sqlCR);
         sql.append("SELECT '" + CommConstants.tag_click_word_ins + "'||'^'||ENTRY_ID||'^'||INS_DATE WRITE_DATA " + CommConstants.sqlCR);
         sql.append(" FROM DIC_CLICK_WORD" + CommConstants.sqlCR);
 
