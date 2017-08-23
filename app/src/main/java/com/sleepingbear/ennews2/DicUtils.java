@@ -1611,18 +1611,27 @@ public class DicUtils {
                 boolean isExistNews = false;
                 for ( int page = 0; page < 2; page ++ ) {
                     Document doc = getDocument(url + (page > 0 ? "&pgi=" + (page + 1) : ""));
-                    Elements es = doc.select("section.newslist dl dd");
+
+                    Elements es = doc.select("ul.listDiv li");
                     for (int i = 0; i < es.size(); i++) {
                         String newsTitle = "";
                         String newsUrl = "";
                         String newsDesc = "";
 
-                        if (es.get(i).select("details h3 a").size() > 0) {
-                            newsTitle = es.get(i).select("details h3 a").text();
-                            newsUrl = es.get(i).select("details h3 a").attr("href");
+                        if (es.get(i).select("p a.fontTitle6").size() > 0) {
+                            newsTitle = es.get(i).select("p a.fontTitle6").text();
+                            newsUrl = "http://www.koreaherald.com" + es.get(i).select("p a.fontTitle6").attr("href");
                         }
-                        if (es.get(i).select("details p a").size() > 0) {
-                            newsDesc = es.get(i).select("details p a").text();
+                        if (es.get(i).select("p a.fontDesc3").size() > 0) {
+                            newsDesc = es.get(i).select("p a.fontDesc3").text();
+                        }
+
+                        if (es.get(i).select("p a.fontTitle3").size() > 0) {
+                            newsTitle = es.get(i).select("p a.fontTitle3").text();
+                            newsUrl = "http://www.koreaherald.com" + es.get(i).select("p a.fontTitle3").attr("href");
+                        }
+                        if (es.get(i).select("p a.fontDesc2").size() > 0) {
+                            newsDesc = es.get(i).select("p a.fontDesc2").text();
                         }
 
                         boolean exist = DicDb.insNewsCategoryNews(db, newsCode, categoryCode, newsTitle, newsDesc, newsUrl);
@@ -1631,6 +1640,7 @@ public class DicUtils {
                             break;
                         }
                     }
+
                     if ( isExistNews ) {
                         break;
                     }

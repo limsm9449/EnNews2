@@ -29,6 +29,7 @@ public class PatchActivity extends AppCompatActivity {
 
         StringBuffer patch = new StringBuffer();
         patch.append("* 패치 내역" + CommConstants.sqlCR);
+        patch.append("- The Korea Herald 뉴스의 양식변경으로 기사가 안나오는 문제점 수정" + CommConstants.sqlCR);
         patch.append("- 해외 8개 영어뉴스 추가" + CommConstants.sqlCR);
         patch.append("- 2017.07.20 : 최고의 영어신문 2 개발" + CommConstants.sqlCR);
 
