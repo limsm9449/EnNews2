@@ -34,9 +34,6 @@
                 android:id="@+id/nav_other_app"
                 android:title="다른 어플들.." />
             <item
-                android:id="@+id/nav_no_ad"
-                android:title="광고 제거(유료)" />
-            <item
                 android:id="@+id/nav_mail"
                 android:title="개발자에게 메일 보내기" />
         </menu>

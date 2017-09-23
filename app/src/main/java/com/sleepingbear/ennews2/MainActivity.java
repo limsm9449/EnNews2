@@ -477,8 +477,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             String url ="http://blog.naver.com/limsm9449/221031416154";
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(intent);
-        } else if (id == R.id.nav_no_ad) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.sleepingbear.ennews2")));
         } else if (id == R.id.nav_mail) {
             Intent intent = new Intent(Intent.ACTION_SENDTO);
             intent.setType("text/plain");
