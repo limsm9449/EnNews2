@@ -135,9 +135,7 @@ public class NewsViewActivity extends AppCompatActivity implements View.OnClickL
         htmlContents = DicUtils.getHtmlString(title, contents, fontSize);
         webView.loadDataWithBaseURL(null, htmlContents, "text/html", "UTF-8", null);
 
-        AdView av = (AdView)findViewById(R.id.adView);
-        AdRequest adRequest = new  AdRequest.Builder().build();
-        av.loadAd(adRequest);
+        DicUtils.setAdView(this);
     }
 
     @Override

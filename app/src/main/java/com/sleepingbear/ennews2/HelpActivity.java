@@ -23,8 +23,8 @@ public class HelpActivity extends AppCompatActivity {
         fab.setVisibility(View.GONE);
 
         ActionBar ab = getSupportActionBar();
-        //ab.setHomeButtonEnabled(true);
-        //ab.setDisplayHomeAsUpEnabled(true);
+        ab.setHomeButtonEnabled(true);
+        ab.setDisplayHomeAsUpEnabled(true);
 
         Bundle b = getIntent().getExtras();
         StringBuffer allSb = new StringBuffer();

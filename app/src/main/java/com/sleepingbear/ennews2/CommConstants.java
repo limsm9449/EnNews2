@@ -73,5 +73,5 @@ public class CommConstants {
         public static String news_washingtonePost = "N10";
         public static String news_newWorkTimes = "N11";
 
-
+        public static boolean isFreeApp = true;
     }

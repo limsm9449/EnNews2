@@ -29,6 +29,7 @@ public class Study3Activity extends AppCompatActivity implements View.OnClickLis
     private String mVocKind;
     private String mMemorization;
     private boolean mIsPlay = false;
+    private String mSort = "QUESTION ASC";
 
     private String mWordMean = "WORD";
 
@@ -73,7 +74,9 @@ public class Study3Activity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.my_a_study3_rb_m_not).setOnClickListener(this);
         findViewById(R.id.my_a_study3_rb_word).setOnClickListener(this);
         findViewById(R.id.my_a_study3_rb_mean).setOnClickListener(this);
-        findViewById(R.id.my_a_study3_b_random).setOnClickListener(this);
+        findViewById(R.id.my_rb_sort_asc).setOnClickListener(this);
+        findViewById(R.id.my_rb_sort_desc).setOnClickListener(this);
+        findViewById(R.id.my_rb_sort_random).setOnClickListener(this);
         findViewById(R.id.my_a_study3_ib_first).setOnClickListener(this);
         findViewById(R.id.my_a_study3_ib_prev).setOnClickListener(this);
         findViewById(R.id.my_a_study3_ib_play).setOnClickListener(this);
@@ -139,9 +142,7 @@ public class Study3Activity extends AppCompatActivity implements View.OnClickLis
 
         getListView();
 
-        AdView av = (AdView)this.findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        av.loadAd(adRequest);
+        DicUtils.setAdView(this);
     }
 
     @Override
@@ -171,9 +172,20 @@ public class Study3Activity extends AppCompatActivity implements View.OnClickLis
 
             mWordMean = "MEAN";
             getListView();
-        } else if (v.getId() == R.id.my_a_study3_b_random) {
+        } else if (v.getId() == R.id.my_rb_sort_asc) {
             mThread.interrupt();
 
+            mSort = "QUESTION ASC";
+            getListView();
+        } else if (v.getId() == R.id.my_rb_sort_desc) {
+            mThread.interrupt();
+
+            mSort = "QUESTION DESC";
+            getListView();
+        } else if (v.getId() == R.id.my_rb_sort_random) {
+            mThread.interrupt();
+
+            mSort = "RANDOM_SEQ";
             mDb.execSQL(DicQuery.updVocRandom());
             getListView();
         } else if (v.getId() == R.id.my_a_study3_ib_first) {
@@ -289,7 +301,7 @@ public class Study3Activity extends AppCompatActivity implements View.OnClickLis
         if (mMemorization.length() == 1) {
             sql.append("   AND A.MEMORIZATION = '" + mMemorization + "' " + CommConstants.sqlCR);
         }
-        sql.append(" ORDER BY A.RANDOM_SEQ" + CommConstants.sqlCR);
+        sql.append(" ORDER BY " + mSort + CommConstants.sqlCR);
         mCursor = mDb.rawQuery(sql.toString(), null);
         if ( mCursor.moveToNext() ) {
             sb.setMax(mCursor.getCount() - 1);

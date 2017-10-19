@@ -134,9 +134,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         sNews = Integer.parseInt(DicUtils.getPreferences(getApplicationContext(), "sNews", "0"));
         sCategory = Integer.parseInt(DicUtils.getPreferences(getApplicationContext(), "sCategory", "0"));
 
-        AdView av = (AdView)findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        av.loadAd(adRequest);
+        DicUtils.setAdView(this);
 
         String[] newNames = DicUtils.getNews("N");
         ActionBar ab = getSupportActionBar();

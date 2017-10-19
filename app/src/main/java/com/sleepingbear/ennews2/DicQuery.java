@@ -776,4 +776,15 @@ public class DicQuery {
         return sql.toString();
     }
 
+    public static String updMyVocabularyRandom(String kind) {
+        StringBuffer sql = new StringBuffer();
+
+        sql.append("UPDATE DIC_VOC" + CommConstants.sqlCR);
+        sql.append("   SET RANDOM_SEQ = RANDOM()" + CommConstants.sqlCR);
+        sql.append(" WHERE KIND = '" + kind + "'" + CommConstants.sqlCR);
+
+        DicUtils.dicSqlLog(sql.toString());
+
+        return sql.toString();
+    }
 }
